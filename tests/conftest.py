@@ -13,6 +13,10 @@ from typing import Any, AsyncGenerator, Dict, Generator, List, Optional
 os.environ["TESTING"] = "true"  # Enable test mode for JWT key generation
 os.environ["JWT_SECRET_KEY"] = secrets.token_urlsafe(32)  # Legacy (now using RS256)
 os.environ["ANTHROPIC_API_KEY"] = "sk-ant-api03-test-key"
+# Pin the model so a developer's .env cannot change what the suite asserts.
+# The model is deployment-configurable, so without this the same test can pass
+# on one machine and fail on another.
+os.environ["ANTHROPIC_MODEL"] = "claude-opus-4-8"
 os.environ["GITHUB_TOKEN"] = "ghp_test_token_1234567890123456789012345678"
 # Tests never use the global engine (fixtures override it), but the URL must
 # be a valid Postgres one regardless of what a local .env contains.

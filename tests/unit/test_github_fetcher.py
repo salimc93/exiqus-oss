@@ -32,12 +32,13 @@ class TestGitHubFetcher:
                 mock_client = Mock()
                 mock_github.return_value = mock_client
 
-                # Mock rate limit
+                # Mock rate limit. PyGithub 2.x returns a RateLimitOverview
+                # whose per-resource limits live under .resources.
                 mock_rate_limit = Mock()
-                mock_rate_limit.core.limit = 5000
-                mock_rate_limit.core.remaining = 4000
-                mock_rate_limit.core.reset = Mock()
-                mock_rate_limit.core.reset.timestamp.return_value = 1234567890
+                mock_rate_limit.resources.core.limit = 5000
+                mock_rate_limit.resources.core.remaining = 4000
+                mock_rate_limit.resources.core.reset = Mock()
+                mock_rate_limit.resources.core.reset.timestamp.return_value = 1234567890
                 mock_client.get_rate_limit.return_value = mock_rate_limit
 
                 yield mock_client
@@ -562,12 +563,13 @@ class TestGitHubFetcherEdgeCases:
                 mock_client = Mock()
                 mock_github.return_value = mock_client
 
-                # Mock rate limit
+                # Mock rate limit. PyGithub 2.x returns a RateLimitOverview
+                # whose per-resource limits live under .resources.
                 mock_rate_limit = Mock()
-                mock_rate_limit.core.limit = 5000
-                mock_rate_limit.core.remaining = 4000
-                mock_rate_limit.core.reset = Mock()
-                mock_rate_limit.core.reset.timestamp.return_value = 1234567890
+                mock_rate_limit.resources.core.limit = 5000
+                mock_rate_limit.resources.core.remaining = 4000
+                mock_rate_limit.resources.core.reset = Mock()
+                mock_rate_limit.resources.core.reset.timestamp.return_value = 1234567890
                 mock_client.get_rate_limit.return_value = mock_rate_limit
 
                 yield mock_client

@@ -205,7 +205,7 @@ def sanitize_repo_name(name: str) -> str:
 
 
 def calculate_cost(
-    input_tokens: int, output_tokens: int, model: str = "claude-3-haiku-20240307"
+    input_tokens: int, output_tokens: int, model: Optional[str] = None
 ) -> float:
     """
     Calculate the cost of an AI API call.
@@ -213,20 +213,20 @@ def calculate_cost(
     Args:
         input_tokens: Number of input tokens
         output_tokens: Number of output tokens
-        model: AI model used
+        model: AI model used. Defaults to the configured model.
 
     Returns:
         Cost in USD
     """
-    # Costs per million tokens
-    costs = {"claude-3-haiku-20240307": {"input": 0.25, "output": 1.25}}
+    from ..ai.cost_tracker import CostTracker
+    from ..core.tier_config import get_configured_model
 
-    if model not in costs:
-        # Default to Haiku pricing
-        model = "claude-3-haiku-20240307"
+    model = model or get_configured_model()
+    pricing = CostTracker.MODEL_PRICING.get(model, CostTracker.UNKNOWN_MODEL_PRICING)
 
-    input_cost = (input_tokens / 1_000_000) * costs[model]["input"]
-    output_cost = (output_tokens / 1_000_000) * costs[model]["output"]
+    # CostTracker prices per 1000 tokens.
+    input_cost = (input_tokens / 1000) * pricing["input"]
+    output_cost = (output_tokens / 1000) * pricing["output"]
 
     return input_cost + output_cost
 

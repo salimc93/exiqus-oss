@@ -14,7 +14,6 @@ import {
   ExternalLink,
   Eye,
   GitBranch,
-  Github,
   Layers,
   Loader2,
   Rocket,
@@ -34,6 +33,7 @@ import { toast } from 'sonner';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { ContextLockIndicator } from '@/components/ui/context-lock-indicator';
 import { ExiqusButton, ExiqusCard, GradientText } from '@/components/ui/exiqus-components';
+import { GithubIcon } from '@/components/ui/github-icon';
 import { useAuth } from '@/contexts/auth-context';
 import { useAuthGuard } from '@/hooks/use-auth-guard';
 import { useCandidateContext } from '@/hooks/use-candidate-context';
@@ -598,13 +598,13 @@ export default function AnalyzePage() {
               {/* Repository URL Input */}
               <div className="space-y-2">
                 <label className="flex items-center gap-2 font-medium text-sm">
-                  <Github className="h-4 w-4 text-purple-400" />
+                  <GithubIcon className="h-4 w-4 text-purple-400" />
                   Repository URL
                 </label>
                 <div className="group relative">
                   <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 opacity-0 blur transition-opacity duration-500 group-focus-within:opacity-30 group-hover:opacity-20"></div>
                   <div className="relative">
-                    <Github className="absolute top-1/2 left-4 h-5 w-5 -translate-y-1/2 text-gray-500 transition-colors group-focus-within:text-purple-400" />
+                    <GithubIcon className="absolute top-1/2 left-4 h-5 w-5 -translate-y-1/2 text-gray-500 transition-colors group-focus-within:text-purple-400" />
                     <input
                       type="url"
                       placeholder="https://github.com/owner/repository"
@@ -1054,7 +1054,7 @@ export default function AnalyzePage() {
                     <p className="mb-2 font-semibold text-gray-100 text-lg">Repository Limits</p>
                     <div className="space-y-2 text-gray-400 text-sm">
                       <div className="flex items-center gap-2">
-                        <Github className="h-3 w-3 text-green-400" />
+                        <GithubIcon className="h-3 w-3 text-green-400" />
                         <span>Any public GitHub repository</span>
                       </div>
                       <div className="flex items-center gap-2">

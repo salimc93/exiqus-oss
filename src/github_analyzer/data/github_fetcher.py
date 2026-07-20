@@ -62,11 +62,13 @@ class GitHubFetcher:
             Dictionary with rate limit information
         """
         try:
-            rate_limit = self.client.get_rate_limit()
+            # PyGithub 2.x returns a RateLimitOverview; the per-resource limits
+            # moved behind .resources (1.x exposed .core directly).
+            core = self.client.get_rate_limit().resources.core
             return {
-                "limit": rate_limit.core.limit,
-                "remaining": rate_limit.core.remaining,
-                "reset_time": int(rate_limit.core.reset.timestamp()),
+                "limit": core.limit,
+                "remaining": core.remaining,
+                "reset_time": int(core.reset.timestamp()),
             }
         except Exception as e:
             logger.error(f"Failed to check rate limit: {e}")

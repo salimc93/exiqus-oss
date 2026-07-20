@@ -64,11 +64,8 @@ class PortfolioInsightsGenerator:
                 f"(context: {context}, tier: {tier})"
             )
 
-            # Get appropriate model for tier
+            # Resolves to ANTHROPIC_MODEL unless the tier sets an override.
             main_model = get_model_for_tier(tier, model_type="main")
-            if not main_model:
-                logger.warning(f"No model configured for tier {tier}, using default")
-                main_model = "claude-3-haiku-20240307"
 
             # Check if tier has separate questions model (Scale+ multi-model approach)
             questions_model = get_model_for_tier(tier, model_type="questions")

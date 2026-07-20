@@ -124,11 +124,8 @@ class PRInsightsGenerator:
                 f"(context: {context}, tier: {tier})"
             )
 
-            # Get appropriate model for tier (simplified: single model per tier)
+            # Resolves to ANTHROPIC_MODEL unless the tier sets an override.
             model = get_model_for_tier(tier)
-            if not model:
-                logger.warning(f"No model configured for tier {tier}, using default")
-                model = "claude-3-haiku-20240307"
 
             # Get tier-specific token limit to leverage full model capacity
             max_tokens = get_token_limit(tier, limit_type="main")

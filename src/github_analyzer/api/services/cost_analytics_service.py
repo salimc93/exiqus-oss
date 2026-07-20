@@ -35,24 +35,22 @@ class CostAnalyticsService:
     # Actual model costs per 1K tokens based on Anthropic pricing (in USD)
     # Format: {"model": {"input": cost_per_1k_tokens, "output": cost_per_1k_tokens}}
     MODEL_COSTS = {
-        # Haiku models
-        "claude-3-haiku-20240307": {
-            "input": 0.00025,
-            "output": 0.00125,
-        },  # $0.25/$1.25 per MTok
-        "claude-3-5-haiku-20241022": {
-            "input": 0.0008,
-            "output": 0.004,
-        },  # $0.80/$4 per MTok
-        # Sonnet models
-        "claude-3-5-sonnet-20241022": {
-            "input": 0.003,
-            "output": 0.015,
-        },  # $3/$15 per MTok
-        "claude-3-7-sonnet-20250219": {
-            "input": 0.003,
-            "output": 0.015,
-        },  # $3/$15 per MTok (same as 3.5)
+        # Current models
+        "claude-fable-5": {"input": 0.010, "output": 0.050},  # $10/$50 per MTok
+        "claude-opus-4-8": {"input": 0.005, "output": 0.025},  # $5/$25 per MTok
+        "claude-opus-4-7": {"input": 0.005, "output": 0.025},  # $5/$25 per MTok
+        "claude-opus-4-6": {"input": 0.005, "output": 0.025},  # $5/$25 per MTok
+        "claude-sonnet-5": {"input": 0.003, "output": 0.015},  # $3/$15 per MTok
+        "claude-sonnet-4-6": {"input": 0.003, "output": 0.015},  # $3/$15 per MTok
+        "claude-haiku-4-5": {"input": 0.001, "output": 0.005},  # $1/$5 per MTok
+        "claude-haiku-4-5-20251001": {"input": 0.001, "output": 0.005},
+        # Retired models, retained so historical records still price
+        "claude-3-haiku-20240307": {"input": 0.00025, "output": 0.00125},
+        "claude-3-5-haiku-20241022": {"input": 0.0008, "output": 0.004},
+        "claude-3-5-sonnet-20241022": {"input": 0.003, "output": 0.015},
+        "claude-3-7-sonnet-20250219": {"input": 0.003, "output": 0.015},
+        "claude-sonnet-4-20250514": {"input": 0.003, "output": 0.015},
+        "claude-sonnet-4-5-20250929": {"input": 0.003, "output": 0.015},
     }
 
     # Average tokens per analysis type (rough estimates)

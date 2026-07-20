@@ -16,6 +16,14 @@ from typing import Any, Dict, List, Optional
 
 from dotenv import load_dotenv
 
+# The Anthropic model every analysis uses unless ANTHROPIC_MODEL overrides it.
+#
+# Exiqus ran as a SaaS and pinned a different model to each paid tier. As an
+# open-source project there is one operator paying for one API key, so the model
+# is a deployment choice rather than a product tier: set ANTHROPIC_MODEL once and
+# every tier uses it. See docs in README for the current model IDs.
+DEFAULT_ANTHROPIC_MODEL = "claude-opus-4-8"
+
 
 @dataclass
 class AnalysisConfig:
@@ -23,8 +31,7 @@ class AnalysisConfig:
 
     template_threshold_days: int = 730  # Use templates for repos inactive >2 years
     min_commits_for_ai: int = 3  # Use templates for repos with <3 commits
-    anthropic_model: str = "claude-3-haiku-20240307"  # Default model (FREE tier only)
-    # NOTE: Tier-specific models now in tier_config.py
+    anthropic_model: str = DEFAULT_ANTHROPIC_MODEL
     # Token limits (defaults, tier-specific in tier_config.py)
     max_tokens: int = 1000  # Default/fallback
     quick_check_tokens: int = 100  # Simple validations
@@ -146,7 +153,7 @@ class Config:
         self.analysis = AnalysisConfig(
             template_threshold_days=self._get_int("TEMPLATE_THRESHOLD_DAYS", 730),
             min_commits_for_ai=self._get_int("MIN_COMMITS_FOR_AI", 3),
-            anthropic_model=self._get_str("ANTHROPIC_MODEL", "claude-3-haiku-20240307"),
+            anthropic_model=self._get_str("ANTHROPIC_MODEL", DEFAULT_ANTHROPIC_MODEL),
             max_tokens=self._get_int("MAX_TOKENS", 400),
             quick_check_tokens=self._get_int("QUICK_CHECK_TOKENS", 100),
             analysis_timeout=self._get_int("ANALYSIS_TIMEOUT", 30),

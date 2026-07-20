@@ -12,6 +12,7 @@ from unittest.mock import Mock, patch
 import pytest
 
 from github_analyzer.core.evidence.question_builder import QuestionBuilder
+from github_analyzer.core.tier_config import get_model_for_tier
 
 
 class TestQuestionBuilder:
@@ -656,10 +657,10 @@ class TestQuestionBuilder:
             evidence_summary, "startup"
         )
 
-        # Should call Anthropic with Haiku 4.5 model (single-model approach for Professional)
+        # Model comes from configuration, not the tier.
         mock_client.messages.create.assert_called()
         call_args = mock_client.messages.create.call_args
-        assert call_args.kwargs["model"] == "claude-haiku-4-5-20251001"
+        assert call_args.kwargs["model"] == get_model_for_tier("professional")
         assert (
             call_args.kwargs["max_tokens"] == 16000
         )  # PROFESSIONAL uses 16000 tokens from tier_config (upgraded with Haiku 4.5)
@@ -701,10 +702,11 @@ class TestQuestionBuilder:
             evidence_summary, "enterprise"
         )
 
-        # Should call Anthropic with Sonnet 4 model (single-model approach for Enterprise)
+        # Model comes from configuration, not the tier, so assert it matches
+        # what tier_config resolves rather than a pinned ID.
         mock_client.messages.create.assert_called()
         call_args = mock_client.messages.create.call_args
-        assert call_args.kwargs["model"] == "claude-sonnet-4-20250514"
+        assert call_args.kwargs["model"] == get_model_for_tier("enterprise")
         assert (
             call_args.kwargs["max_tokens"] == 20000
         )  # ENTERPRISE uses 20000 tokens from tier_config

@@ -10,6 +10,7 @@ from unittest.mock import Mock, patch
 import pytest
 
 from github_analyzer.ai.portfolio_insights_generator import PortfolioInsightsGenerator
+from github_analyzer.core.tier_config import get_model_for_tier, get_tier_config
 from github_analyzer.data.portfolio_models import PortfolioMetadata, RepoData
 
 
@@ -302,7 +303,7 @@ class TestGenerateInsightsSingleModel:
         # Verify success
         assert result["success"] is True
         assert "insights" in result
-        assert result["model_used"] == "claude-haiku-4-5-20251001"
+        assert result["model_used"] == get_model_for_tier("professional")
         assert result["context"] == "enterprise"
 
         # Verify token tracking
@@ -361,8 +362,19 @@ class TestGenerateInsightsMultiModel:
         sample_evidence: Dict[str, Any],
         mock_ai_response_single_model: str,
         mock_ai_response_phase2_questions: str,
+        monkeypatch: pytest.MonkeyPatch,
     ) -> None:
-        """Test successful insights generation with multi-model approach."""
+        """Two-phase generation runs when a tier overrides the questions model.
+
+        Tiers ship with no overrides, so both models resolve to ANTHROPIC_MODEL
+        and this path stays dormant. Setting an explicit questions_model is what
+        activates it, so the test configures one rather than relying on a tier
+        that happens to differ.
+        """
+        scale_plus = get_tier_config("scale_plus")
+        assert scale_plus is not None
+        monkeypatch.setattr(scale_plus, "questions_model", "claude-questions-model")
+
         generator = PortfolioInsightsGenerator(api_key)
 
         # Mock Phase 1 response
@@ -392,7 +404,7 @@ class TestGenerateInsightsMultiModel:
 
         # Verify success
         assert result["success"] is True
-        assert result["questions_model_used"] == "claude-sonnet-4-5-20250929"
+        assert result["questions_model_used"] == "claude-questions-model"
 
         # Verify total tokens include both phases
         assert result["input_tokens"] == 3000  # 2000 + 1000

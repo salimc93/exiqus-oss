@@ -1981,8 +1981,11 @@ class RepositoryAnalyzer:
             prompt = f"Analyze this {language} repository called '{repo_name}'. Provide a brief 1-sentence summary."
 
             # Use a small token limit for quick tests
+            from ..core.tier_config import get_configured_model
+
+            model = get_configured_model()
             response = self.anthropic_client.messages.create(
-                model="claude-3-haiku-20240307",
+                model=model,
                 max_tokens=500,  # Small limit for quick tests
                 temperature=0.1,  # Lowered for deterministic output
                 messages=[{"role": "user", "content": prompt}],
@@ -1990,7 +1993,7 @@ class RepositoryAnalyzer:
 
             # Track the usage
             self.cost_tracker.track_api_call(
-                model="claude-3-haiku-20240307",
+                model=model,
                 input_tokens=len(prompt) // 4,  # Rough estimation
                 output_tokens=(
                     len(response.content[0].text) // 4

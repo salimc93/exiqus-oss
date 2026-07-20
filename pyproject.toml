@@ -46,7 +46,7 @@ packages = [{include = "github_analyzer", from = "src"}]
 
 [tool.poetry.dependencies]
 python = ">=3.10,<4.0"
-PyGithub = "^1.59.1"
+PyGithub = "^2.9.1"
 anthropic = "^0.117.0"
 typer = "^0.27.0"
 python-dotenv = "^1.0.0"
@@ -81,12 +81,12 @@ reportlab = "^4.4.3"
 alembic = "^1.16.5"
 disposable-email-domains = "^0.0.226"
 authlib = "^1.6.4"
-fastapi-guard = {version = ">=4.2.2", python = ">=3.10,<3.15"}
+fastapi-guard = {version = "^7.3.0", python = ">=3.10,<3.15"}
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.4.3"
-pytest-asyncio = "^0.21.1"
-pytest-cov = "^4.1.0"
+pytest-asyncio = "^0.23.8"
+pytest-cov = "^7.1.0"
 pytest-mock = "^3.12.0"
 mypy = "^1.7.0"
 pre-commit = "^3.5.0"

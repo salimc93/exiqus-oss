@@ -83,6 +83,9 @@ Plus:
 - **Tiered analysis depth**: configurable tiers (see
   `src/github_analyzer/core/tier_config.py`) from template-based to
   deep multi-pass AI analysis
+- **Bring your own model**: set `ANTHROPIC_MODEL` to whichever Claude
+  model you want to pay for and every tier uses it. Defaults to
+  `claude-opus-4-8`; `claude-sonnet-5` and `claude-haiku-4-5` cost less
 - **Full SaaS scaffolding**: auth, Stripe billing, usage metering,
   admin portal, rate limiting; useful as a reference even if you only
   self-host the analyzer

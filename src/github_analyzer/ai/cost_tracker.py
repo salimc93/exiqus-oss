@@ -91,16 +91,34 @@ class CostTracker:
     to prevent unexpected API charges.
     """
 
-    # Model pricing (per 1000 tokens)
+    # Model pricing (per 1000 tokens). Verify against
+    # https://platform.claude.com/docs/en/pricing before relying on these for
+    # billing - they are a local snapshot, not a live feed.
     MODEL_PRICING = {
-        "claude-3-haiku-20240307": {"input": 0.00025, "output": 0.00125},  # Haiku 3.0
-        "claude-3-5-haiku-20241022": {"input": 0.001, "output": 0.005},  # Haiku 3.5
-        "claude-3-5-sonnet-20241022": {"input": 0.003, "output": 0.015},  # Sonnet 3.5
-        "claude-3-7-sonnet-20250219": {
-            "input": 0.003,
-            "output": 0.015,
-        },  # Sonnet 3.7 (highest model)
+        # Current models
+        "claude-fable-5": {"input": 0.010, "output": 0.050},
+        "claude-opus-4-8": {"input": 0.005, "output": 0.025},
+        "claude-opus-4-7": {"input": 0.005, "output": 0.025},
+        "claude-opus-4-6": {"input": 0.005, "output": 0.025},
+        # Sonnet 5 list price; introductory rates are lower, so this
+        # over-estimates rather than under-estimates.
+        "claude-sonnet-5": {"input": 0.003, "output": 0.015},
+        "claude-sonnet-4-6": {"input": 0.003, "output": 0.015},
+        "claude-haiku-4-5": {"input": 0.001, "output": 0.005},
+        "claude-haiku-4-5-20251001": {"input": 0.001, "output": 0.005},
+        # Retired models, retained so historical cost records still price
+        "claude-3-haiku-20240307": {"input": 0.00025, "output": 0.00125},
+        "claude-3-5-haiku-20241022": {"input": 0.001, "output": 0.005},
+        "claude-3-5-sonnet-20241022": {"input": 0.003, "output": 0.015},
+        "claude-3-7-sonnet-20250219": {"input": 0.003, "output": 0.015},
+        "claude-sonnet-4-20250514": {"input": 0.003, "output": 0.015},
+        "claude-sonnet-4-5-20250929": {"input": 0.003, "output": 0.015},
     }
+
+    # Used when a model is not in the table. Deliberately the most expensive
+    # entry: an unknown model is more likely to be newer than older, and a
+    # budget guard that under-reports is worse than one that over-reports.
+    UNKNOWN_MODEL_PRICING = {"input": 0.010, "output": 0.050}
 
     def __init__(self, storage: Optional["CostStorage"] = None) -> None:
         """Initialize cost tracker with configuration and persistent storage."""
@@ -192,10 +210,11 @@ class CostTracker:
         """
         if model not in self.MODEL_PRICING:
             logger.warning(
-                f"Unknown model pricing for: {model}, using default Haiku pricing"
+                f"No pricing entry for model {model!r}; falling back to the "
+                "highest known rate so spend is over-reported rather than "
+                "under-reported. Add it to MODEL_PRICING for accurate figures."
             )
-            # Default to Haiku 3.0 pricing for unknown models
-            pricing = self.MODEL_PRICING["claude-3-haiku-20240307"]
+            pricing = self.UNKNOWN_MODEL_PRICING
         else:
             pricing = self.MODEL_PRICING[model]
         input_cost = (input_tokens * pricing["input"]) / 1000
