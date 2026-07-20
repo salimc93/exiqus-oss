@@ -1,0 +1,45 @@
+{
+  "context": "open_source",
+  "tier": "growth",
+  "success": true,
+  "generation_time": 104.71756887435913,
+  "context_fit_score": 1.0,
+  "confidence_score": 1.0,
+  "total_questions": 10,
+  "visible_questions": 10,
+  "blurred_questions": 0,
+  "question_categories": {
+    "collaboration_style": 1,
+    "growth_mindset": 1,
+    "leadership_potential": 1,
+    "problem_solving": 2,
+    "quality_practices": 1,
+    "technical_decisions": 2,
+    "work_patterns": 2
+  },
+  "sample_questions": [
+    {
+      "question": "With 37 CI/CD related commits, you clearly value automation. How do you collaborate with team members to design and implement these automated workflows?",
+      "category": "collaboration_style",
+      "has_green_flags": true,
+      "has_red_flags": true
+    },
+    {
+      "question": "Given your high code complexity, what strategies are you using to continuously improve your architectural design skills?",
+      "category": "growth_mindset",
+      "has_green_flags": true,
+      "has_red_flags": true
+    },
+    {
+      "question": "Despite being highly collaborative, your leadership score is currently zero. How do you see yourself potentially transitioning into technical leadership roles?",
+      "category": "leadership_potential",
+      "has_green_flags": true,
+      "has_red_flags": true
+    }
+  ],
+  "hiring_recommendations": [
+    "Strong fit for Open Source Contributor role"
+  ],
+  "metric_count": 14,
+  "api_model": "Haiku 3.0 + Haiku 3.5 (questions)"
+}

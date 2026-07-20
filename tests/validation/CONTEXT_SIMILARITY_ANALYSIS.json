@@ -1,0 +1,500 @@
+{
+  "tiers": {
+    "free": {
+      "similarity_matrix": {
+        "contexts": [
+          "startup",
+          "enterprise",
+          "agency",
+          "open_source"
+        ],
+        "question_similarity": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "theme_similarity": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "metric_similarity": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "average_similarity": {
+          "questions": 0.0,
+          "themes": 0.0,
+          "metrics": 0.0
+        }
+      },
+      "differentiation": {
+        "most_differentiated": [
+          [
+            "startup",
+            "enterprise",
+            0.0
+          ],
+          [
+            "startup",
+            "agency",
+            0.0
+          ],
+          [
+            "startup",
+            "open_source",
+            0.0
+          ],
+          [
+            "enterprise",
+            "agency",
+            0.0
+          ],
+          [
+            "enterprise",
+            "open_source",
+            0.0
+          ]
+        ],
+        "least_differentiated": [],
+        "differentiation_score": 1.0
+      }
+    },
+    "starter": {
+      "similarity_matrix": {
+        "contexts": [
+          "startup",
+          "enterprise",
+          "agency",
+          "open_source"
+        ],
+        "question_similarity": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "theme_similarity": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "metric_similarity": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "average_similarity": {
+          "questions": 0.0,
+          "themes": 0.0,
+          "metrics": 0.0
+        }
+      },
+      "differentiation": {
+        "most_differentiated": [
+          [
+            "startup",
+            "enterprise",
+            0.0
+          ],
+          [
+            "startup",
+            "agency",
+            0.0
+          ],
+          [
+            "startup",
+            "open_source",
+            0.0
+          ],
+          [
+            "enterprise",
+            "agency",
+            0.0
+          ],
+          [
+            "enterprise",
+            "open_source",
+            0.0
+          ]
+        ],
+        "least_differentiated": [],
+        "differentiation_score": 1.0
+      }
+    },
+    "growth": {
+      "similarity_matrix": {
+        "contexts": [
+          "startup",
+          "enterprise",
+          "agency",
+          "open_source"
+        ],
+        "question_similarity": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "theme_similarity": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "metric_similarity": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "average_similarity": {
+          "questions": 0.0,
+          "themes": 0.0,
+          "metrics": 0.0
+        }
+      },
+      "differentiation": {
+        "most_differentiated": [
+          [
+            "startup",
+            "enterprise",
+            0.0
+          ],
+          [
+            "startup",
+            "agency",
+            0.0
+          ],
+          [
+            "startup",
+            "open_source",
+            0.0
+          ],
+          [
+            "enterprise",
+            "agency",
+            0.0
+          ],
+          [
+            "enterprise",
+            "open_source",
+            0.0
+          ]
+        ],
+        "least_differentiated": [],
+        "differentiation_score": 1.0
+      }
+    },
+    "scale": {
+      "similarity_matrix": {
+        "contexts": [
+          "startup",
+          "enterprise",
+          "agency",
+          "open_source"
+        ],
+        "question_similarity": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "theme_similarity": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "metric_similarity": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "average_similarity": {
+          "questions": 0.0,
+          "themes": 0.0,
+          "metrics": 0.0
+        }
+      },
+      "differentiation": {
+        "most_differentiated": [
+          [
+            "startup",
+            "enterprise",
+            0.0
+          ],
+          [
+            "startup",
+            "agency",
+            0.0
+          ],
+          [
+            "startup",
+            "open_source",
+            0.0
+          ],
+          [
+            "enterprise",
+            "agency",
+            0.0
+          ],
+          [
+            "enterprise",
+            "open_source",
+            0.0
+          ]
+        ],
+        "least_differentiated": [],
+        "differentiation_score": 1.0
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "context": "enterprise",
+  "tier": "growth",
+  "success": true,
+  "generation_time": 102.81182074546814,
+  "context_fit_score": 0.5231071428571428,
+  "confidence_score": 0.705,
+  "total_questions": 10,
+  "questions": [
+    "With 37 CI/CD related commits, how do you collaborate with DevOps and infrastructure teams to streamline deployment processes?",
+    "Given your high code complexity, what strategies do you use to continuously improve your technical skills and architectural design?",
+    "Your repository shows a highly collaborative work style. How do you mentor junior developers and transfer complex technical knowledge?",
+    "I see 7 bug fix commits representing 14% of your work. Walk me through your most complex debugging challenge and your systematic approach.",
+    "Reflecting on your bug fix commits, what systematic approach do you use to identify and prevent recurring software defects?",
+    "Your code complexity score is 8.0/10. How do you balance delivering complex solutions while maintaining code maintainability?",
+    "Your GitHub shows 99.9% Python usage. What architectural considerations drive your language specialization in enterprise environments?",
+    "With Python dominating your codebase, how do you evaluate and integrate complementary technologies or microservices?",
+    "You've completed one major commit with over 500 lines of code. What's your approach to managing large-scale system changes?",
+    "Your large commits suggest handling complex changes. How do you balance delivering features quickly while maintaining code quality and team alignment?"
+  ],
+  "metrics_count": 13
+}

@@ -1,0 +1,19 @@
+{
+  "context": "agency",
+  "tier": "free",
+  "success": true,
+  "generation_time": 54.60943555831909,
+  "context_fit_score": 1.0,
+  "confidence_score": 1.0,
+  "total_questions": 7,
+  "questions": [
+    "Your GitHub profile indicates that you have a highly collaborative work style, with a significant number of commits related to CI/CD processes. Can you share an example of a project where your collaborative approach was particularly beneficial, and how you navigated any challenges that arose during the collaboration?",
+    "Your repository shows that you have handled at least one major commit (over 500 lines of code). Can you describe your approach to tackling large-scale changes or refactoring efforts, and how you ensure that you maintain code quality and minimize the risk of regressions?",
+    "Your GitHub profile indicates that you have a highly collaborative work style, but your leadership score is 0.0. Can you share your thoughts on the role of leadership in a collaborative environment, and how you've contributed to the success of your teams in the past?",
+    "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+    "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+    "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+    "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588"
+  ],
+  "metrics_count": 2
+}

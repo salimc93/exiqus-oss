@@ -1,0 +1,72 @@
+# Railway-optimized Dockerfile for Exiqus GitHub Analyzer
+# Single stage build optimized for Railway deployment
+
+# Use official Python image from Docker Hub with explicit registry
+# If Docker Hub is down, Railway will retry automatically
+FROM docker.io/library/python:3.12-slim
+
+# Set Python environment variables only
+# Railway will inject all other environment variables at runtime
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PYTHONPATH=/app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    gcc \
+    g++ \
+    libpq-dev \
+    curl \
+    git \
+    && rm -rf /var/lib/apt/lists/* \
+    && apt-get clean
+
+# Install Poetry
+RUN pip install --no-cache-dir poetry==1.7.1
+
+# Create app directory
+WORKDIR /app
+
+# Copy dependency files
+COPY pyproject.toml poetry.lock ./
+
+# Install dependencies without creating a virtual environment
+# Railway prefers dependencies installed globally in the container
+RUN poetry config virtualenvs.create false \
+    && poetry install --only=main --no-root --no-interaction --no-ansi
+
+# Force cache invalidation for src/ layer - updated 2025-10-03 21:55 UTC
+ARG CACHE_BUST=20251003-2155
+RUN echo "Cache bust: $CACHE_BUST"
+
+# Copy application code
+COPY src/ ./src/
+COPY README.md ./
+COPY alembic.ini ./
+COPY alembic/ ./alembic/
+# Create scripts directory first, then copy
+RUN mkdir -p ./scripts
+COPY scripts/ ./scripts/
+
+# Create necessary directories
+RUN mkdir -p /app/data /app/logs /app/uploads /tmp/costs
+
+# Install the application
+RUN poetry install --only=main --no-interaction --no-ansi
+
+# Make startup script executable
+RUN chmod +x /app/scripts/startup.sh
+
+# Create a non-root user (optional for Railway, but good practice)
+RUN useradd -m -u 1000 appuser && chown -R appuser:appuser /app
+USER appuser
+
+# Health check endpoint
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD python -c "import requests; requests.get(f'http://localhost:{os.getenv(\"PORT\", 8000)}/api/v1/health', timeout=5)" || exit 1
+
+# Railway will override this with PORT env variable
+EXPOSE 8000
+
+# Use the startup script that runs migrations first
+CMD ["/app/scripts/startup.sh"]

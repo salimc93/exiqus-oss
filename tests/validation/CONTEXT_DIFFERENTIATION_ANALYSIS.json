@@ -1,0 +1,195 @@
+{
+  "results": [
+    {
+      "context": "agency",
+      "tier": "growth",
+      "success": true,
+      "generation_time": 109.96077609062195,
+      "context_fit_score": 1.0,
+      "confidence_score": 1.0,
+      "total_questions": 10,
+      "questions": [
+        "With 37 CI/CD related commits, you seem deeply invested in automation. How do you collaborate with team members who might have different automation preferences?",
+        "Given your highly specialized Python background, what strategies are you using to expand your technical capabilities beyond your current expertise?",
+        "With your detail-oriented work style and comprehensive communication, how do you see yourself contributing to team knowledge sharing and mentorship?",
+        "I see you have 7 bug fix commits representing 14% of your work. Walk me through your most complex debugging experience and how you approached resolving it.",
+        "Your GitHub shows a highly collaborative profile. Can you describe a complex project where collaboration was critical to your success?",
+        "Your code complexity score is 8.0/10, which is quite high. How do you balance delivering complex solutions while maintaining code maintainability?",
+        "With your high code complexity and significant bug fix commits, how do you balance rapid development with maintaining code quality?",
+        "Your GitHub shows 99.9% Python usage. What drives your decision to specialize so deeply in one language, especially in an agency environment with diverse client needs?",
+        "I noticed you have one major commit with over 500 lines of change. Can you describe your approach to managing large-scale refactoring or feature implementation?",
+        "Your activity suggests an intense work style with potentially low work-life balance. How do you manage sustainable productivity without burnout?"
+      ],
+      "metrics_count": 14
+    },
+    {
+      "context": "startup",
+      "tier": "free",
+      "success": true,
+      "generation_time": 52.05365324020386,
+      "context_fit_score": 1.0,
+      "confidence_score": 1.0,
+      "total_questions": 8,
+      "questions": [
+        "Your repository shows a highly collaborative work style, with 37 CI/CD-related commits. Can you tell me more about how you collaborate with your team and integrate your work into the codebase?",
+        "Your repository doesn't provide much information about your progression or growth rate over time. Can you tell me about your approach to continuous learning and how you stay up-to-date with the latest technologies and best practices in software development?",
+        "Your repository doesn't indicate any leadership experience or contributions. Can you tell me about your experience in taking on leadership roles, either formally or informally, and how you've helped to drive the success of your team or projects?",
+        "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+        "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+        "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+        "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+        "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588"
+      ],
+      "metrics_count": 2
+    },
+    {
+      "context": "open_source",
+      "tier": "growth",
+      "success": true,
+      "generation_time": 106.85569667816162,
+      "context_fit_score": 1.0,
+      "confidence_score": 1.0,
+      "total_questions": 10,
+      "questions": [
+        "With 37 CI/CD related commits, you seem to value automated processes. How do you collaborate with team members to design and implement these workflows?",
+        "Given your detail-oriented work style, how do you balance thoroughness with the need for rapid iteration in open source development?",
+        "Your behavioral analysis suggests a highly collaborative style. How do you see yourself contributing to community dynamics in open source projects?",
+        "I see you have 7 bug fix commits representing 14% of your work. Walk me through your most complex debugging experience and how you approached resolving it.",
+        "With a high code complexity score, how do you approach architectural decisions to manage system complexity proactively?",
+        "Your code complexity score is 8.0/10, which is quite high. How do you approach managing and reducing complexity in your projects?",
+        "Your repository shows 99.9% Python usage. What drives your decision to specialize so deeply in one language for open source projects?",
+        "Your repository shows deep Python specialization. How do you stay current with evolving language features and best practices?",
+        "I noticed you have one major commit with over 500 lines of changes. What's your philosophy on managing large-scale code transformations?",
+        "Your commit history shows significant engagement with CI/CD. How do you balance automation with maintaining human oversight and creativity?"
+      ],
+      "metrics_count": 14
+    },
+    {
+      "context": "agency",
+      "tier": "free",
+      "success": true,
+      "generation_time": 54.60943555831909,
+      "context_fit_score": 1.0,
+      "confidence_score": 1.0,
+      "total_questions": 7,
+      "questions": [
+        "Your GitHub profile indicates that you have a highly collaborative work style, with a significant number of commits related to CI/CD processes. Can you share an example of a project where your collaborative approach was particularly beneficial, and how you navigated any challenges that arose during the collaboration?",
+        "Your repository shows that you have handled at least one major commit (over 500 lines of code). Can you describe your approach to tackling large-scale changes or refactoring efforts, and how you ensure that you maintain code quality and minimize the risk of regressions?",
+        "Your GitHub profile indicates that you have a highly collaborative work style, but your leadership score is 0.0. Can you share your thoughts on the role of leadership in a collaborative environment, and how you've contributed to the success of your teams in the past?",
+        "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+        "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+        "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+        "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588"
+      ],
+      "metrics_count": 2
+    },
+    {
+      "context": "enterprise",
+      "tier": "free",
+      "success": true,
+      "generation_time": 61.32558536529541,
+      "context_fit_score": 0.5231071428571428,
+      "confidence_score": 0.705,
+      "total_questions": 7,
+      "questions": [
+        "Your repository shows a highly collaborative work style, with 37 CI/CD-related commits. Can you tell me more about how you approach collaboration within your team? How do you ensure effective communication and knowledge sharing?",
+        "Your repository shows that you've handled at least one major commit (over 500 lines of code). Can you tell me about your approach to tackling large-scale changes or complex technical challenges? How do you ensure you're continuously learning and improving your skills?",
+        "Your repository doesn't show any clear leadership experience or contributions. Can you tell me about any opportunities you've had to take on a leadership role, either formally or informally? How do you see your potential for growth in this area?",
+        "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+        "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+        "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+        "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588"
+      ],
+      "metrics_count": 2
+    },
+    {
+      "context": "enterprise",
+      "tier": "growth",
+      "success": true,
+      "generation_time": 102.81182074546814,
+      "context_fit_score": 0.5231071428571428,
+      "confidence_score": 0.705,
+      "total_questions": 10,
+      "questions": [
+        "With 37 CI/CD related commits, how do you collaborate with DevOps and infrastructure teams to streamline deployment processes?",
+        "Given your high code complexity, what strategies do you use to continuously improve your technical skills and architectural design?",
+        "Your repository shows a highly collaborative work style. How do you mentor junior developers and transfer complex technical knowledge?",
+        "I see 7 bug fix commits representing 14% of your work. Walk me through your most complex debugging challenge and your systematic approach.",
+        "Reflecting on your bug fix commits, what systematic approach do you use to identify and prevent recurring software defects?",
+        "Your code complexity score is 8.0/10. How do you balance delivering complex solutions while maintaining code maintainability?",
+        "Your GitHub shows 99.9% Python usage. What architectural considerations drive your language specialization in enterprise environments?",
+        "With Python dominating your codebase, how do you evaluate and integrate complementary technologies or microservices?",
+        "You've completed one major commit with over 500 lines of code. What's your approach to managing large-scale system changes?",
+        "Your large commits suggest handling complex changes. How do you balance delivering features quickly while maintaining code quality and team alignment?"
+      ],
+      "metrics_count": 13
+    },
+    {
+      "context": "startup",
+      "tier": "growth",
+      "success": true,
+      "generation_time": 107.60359191894531,
+      "context_fit_score": 1.0,
+      "confidence_score": 1.0,
+      "total_questions": 10,
+      "questions": [
+        "With 37 CI/CD related commits, you seem deeply invested in automation. How do you collaborate with teammates to design and implement these pipelines?",
+        "Given your high-complexity code and specialized Python background, how are you expanding your technical capabilities beyond your current expertise?",
+        "Your commits suggest a detail-oriented approach. How do you balance technical precision with team productivity and momentum?",
+        "I see you have 7 bug fix commits representing 14% of your work. Walk me through your most complex debugging experience and how you approached resolving it.",
+        "Your repository shows a consistent pattern of bug fixes. What's your systematic approach to identifying and preventing recurring issues?",
+        "Your code complexity score is 8.0/10, which suggests sophisticated but potentially challenging implementations. How do you balance architectural complexity with maintainability?",
+        "Your GitHub shows 99.9% Python usage. What drives your language specialization, and how do you evaluate when to potentially introduce another language?",
+        "With Python dominating your codebase, how do you evaluate and integrate external libraries or frameworks?",
+        "I noticed you've made one major commit with over 500 lines of change. What's your philosophy for managing large-scale refactoring or feature implementations?",
+        "Your behavioral profile suggests high collaboration but potentially low work-life balance. How do you sustainably maintain your intense work approach?"
+      ],
+      "metrics_count": 14
+    },
+    {
+      "context": "open_source",
+      "tier": "free",
+      "success": true,
+      "generation_time": 49.609710931777954,
+      "context_fit_score": 1.0,
+      "confidence_score": 1.0,
+      "total_questions": 7,
+      "questions": [
+        "Your behavioral analysis indicates that you have a highly collaborative work style. Can you share an example of how you've contributed to an open-source project as part of a team?",
+        "I noticed that you have one major commit (over 500 lines) in your repository. Can you share your approach to handling large-scale changes and complex technical challenges in an open-source project?",
+        "Your GitHub analysis shows a lack of leadership-related commits, but your collaboration style is described as highly collaborative. How do you envision your role and contributions in an open-source project, especially when it comes to guiding the project's direction and mentoring other contributors?",
+        "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+        "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+        "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+        "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588"
+      ],
+      "metrics_count": 2
+    }
+  ],
+  "analysis": {
+    "growth": {
+      "differentiation_score": 0.611595834105126,
+      "similarity_scores": {
+        "agency-open_source": 0.4293193717277487,
+        "agency-enterprise": 0.31840796019900497,
+        "agency-startup": 0.4635416666666667,
+        "open_source-enterprise": 0.34759358288770054,
+        "open_source-startup": 0.4031413612565445,
+        "enterprise-startup": 0.3684210526315789
+      },
+      "context_count": 4
+    },
+    "free": {
+      "differentiation_score": 0.7437419006979331,
+      "similarity_scores": {
+        "startup-agency": 0.20161290322580644,
+        "startup-enterprise": 0.3394495412844037,
+        "startup-open_source": 0.13821138211382114,
+        "agency-enterprise": 0.3089430894308943,
+        "agency-open_source": 0.3135593220338983,
+        "enterprise-open_source": 0.23577235772357724
+      },
+      "context_count": 4
+    }
+  }
+}

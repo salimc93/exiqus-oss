@@ -1,0 +1,45 @@
+{
+  "context": "agency",
+  "tier": "growth",
+  "success": true,
+  "generation_time": 105.44246196746826,
+  "context_fit_score": 1.0,
+  "confidence_score": 1.0,
+  "total_questions": 10,
+  "visible_questions": 10,
+  "blurred_questions": 0,
+  "question_categories": {
+    "collaboration_style": 1,
+    "growth_mindset": 1,
+    "leadership_potential": 1,
+    "problem_solving": 2,
+    "quality_practices": 2,
+    "technical_decisions": 2,
+    "work_patterns": 1
+  },
+  "sample_questions": [
+    {
+      "question": "With 37 CI/CD related commits, you seem deeply invested in automation. How do you collaborate with team members who might have different automation preferences?",
+      "category": "collaboration_style",
+      "has_green_flags": true,
+      "has_red_flags": true
+    },
+    {
+      "question": "Given your high code complexity, what strategies are you currently using to improve your architectural design skills?",
+      "category": "growth_mindset",
+      "has_green_flags": true,
+      "has_red_flags": true
+    },
+    {
+      "question": "Despite complex code and significant commits, your leadership score appears low. How do you see yourself growing into a technical leadership role?",
+      "category": "leadership_potential",
+      "has_green_flags": true,
+      "has_red_flags": true
+    }
+  ],
+  "hiring_recommendations": [
+    "Strong fit for Agency Developer role"
+  ],
+  "metric_count": 14,
+  "api_model": "Haiku 3.0 + Haiku 3.5 (questions)"
+}

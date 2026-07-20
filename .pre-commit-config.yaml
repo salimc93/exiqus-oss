@@ -1,0 +1,56 @@
+# Pre-commit hooks for code quality
+# Install: pip install pre-commit && pre-commit install
+# Run manually: pre-commit run --all-files
+
+repos:
+  # Lint + format with Ruff (replaces black, isort, flake8, bandit)
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.14.0
+    hooks:
+      - id: ruff
+        name: Lint with Ruff
+        args: [--fix]
+        files: ^(src|tests|scripts)/.*\.py$
+      - id: ruff-format
+        name: Format with Ruff
+        files: ^(src|tests|scripts)/.*\.py$
+
+  # Type checking with MyPy
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.16.1
+    hooks:
+      - id: mypy
+        name: Type check with MyPy
+        args: [
+          --ignore-missing-imports,
+          --no-implicit-optional,
+          --warn-redundant-casts,
+          --warn-unused-ignores
+        ]
+        files: ^src/github_analyzer/.*\.py$
+        additional_dependencies: [
+          types-requests,
+          types-PyYAML
+        ]
+
+  # General hygiene
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: trailing-whitespace
+        name: Fix trailing whitespace
+      - id: end-of-file-fixer
+        name: Fix missing end-of-file newline
+      - id: check-yaml
+        name: Check YAML syntax
+      - id: check-json
+        name: Check JSON syntax
+      - id: check-added-large-files
+        name: Check for large files
+        args: [--maxkb=1000]
+      - id: check-merge-conflict
+        name: Check for merge conflicts
+      - id: check-case-conflict
+        name: Check for case conflicts
+      - id: detect-private-key
+        name: Detect private keys

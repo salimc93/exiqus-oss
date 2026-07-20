@@ -1,0 +1,22 @@
+{
+  "context": "open_source",
+  "tier": "growth",
+  "success": true,
+  "generation_time": 106.85569667816162,
+  "context_fit_score": 1.0,
+  "confidence_score": 1.0,
+  "total_questions": 10,
+  "questions": [
+    "With 37 CI/CD related commits, you seem to value automated processes. How do you collaborate with team members to design and implement these workflows?",
+    "Given your detail-oriented work style, how do you balance thoroughness with the need for rapid iteration in open source development?",
+    "Your behavioral analysis suggests a highly collaborative style. How do you see yourself contributing to community dynamics in open source projects?",
+    "I see you have 7 bug fix commits representing 14% of your work. Walk me through your most complex debugging experience and how you approached resolving it.",
+    "With a high code complexity score, how do you approach architectural decisions to manage system complexity proactively?",
+    "Your code complexity score is 8.0/10, which is quite high. How do you approach managing and reducing complexity in your projects?",
+    "Your repository shows 99.9% Python usage. What drives your decision to specialize so deeply in one language for open source projects?",
+    "Your repository shows deep Python specialization. How do you stay current with evolving language features and best practices?",
+    "I noticed you have one major commit with over 500 lines of changes. What's your philosophy on managing large-scale code transformations?",
+    "Your commit history shows significant engagement with CI/CD. How do you balance automation with maintaining human oversight and creativity?"
+  ],
+  "metrics_count": 14
+}

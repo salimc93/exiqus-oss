@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Dark background -->
+  <rect width="1200" height="630" fill="#0A0A0A"/>
+
+  <!-- Gradient definition -->
+  <defs>
+    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#8b5cf6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:1" />
+    </linearGradient>
+
+    <!-- Glow effect -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- EXIQUS Logo Text -->
+  <text x="600" y="280" font-family="Montserrat, system-ui, sans-serif" font-size="90" font-weight="600" text-anchor="middle" fill="url(#logoGradient)" filter="url(#glow)" letter-spacing="4">
+    EXIQUS
+  </text>
+
+  <!-- Tagline -->
+  <text x="600" y="360" font-family="Inter, system-ui, sans-serif" font-size="28" font-weight="400" text-anchor="middle" fill="#a8a8a8">
+    AI-Powered Developer Assessment
+  </text>
+
+  <!-- Subtitle -->
+  <text x="600" y="410" font-family="Inter, system-ui, sans-serif" font-size="20" font-weight="300" text-anchor="middle" fill="#6e6e6e">
+    Evidence-Based Technical Recruitment
+  </text>
+</svg>

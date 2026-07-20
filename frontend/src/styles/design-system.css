@@ -1,0 +1,144 @@
+/* Exiqus Design System - Modern, Clean, Evidence-Based */
+
+@layer base {
+  :root {
+    /* Background Colors */
+    --bg-primary: #0a0a0a;
+    --bg-secondary: #111111;
+    --bg-tertiary: #1a1a1a;
+    --bg-accent: #0d0d0d;
+
+    /* Text Colors */
+    --text-primary: #fafafa;
+    --text-secondary: #a8a8a8;
+    --text-tertiary: #6e6e6e;
+    --text-accent: #e5e5e5;
+
+    /* Brand Colors */
+    --brand-purple: #8b5cf6;
+    --brand-blue: #3b82f6;
+
+    /* Semantic Colors */
+    --success: #10b981;
+    --warning: #f59e0b;
+    --error: #ef4444;
+    --info: #3b82f6;
+
+    /* Borders */
+    --border-subtle: rgba(255, 255, 255, 0.06);
+    --border-default: rgba(255, 255, 255, 0.09);
+    --border-strong: rgba(255, 255, 255, 0.12);
+  }
+
+  * {
+    @apply border-white/[0.09];
+  }
+
+  html {
+    @apply bg-[#0A0A0A] text-[#FAFAFA] antialiased;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-[#0A0A0A];
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-white/10;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-white/20;
+  }
+}
+
+@layer components {
+  /* Exiqus card */
+  .card-exiqus {
+    @apply rounded-lg border border-white/[0.06] bg-[#111111] transition-all duration-200 hover:border-white/[0.09];
+  }
+
+  /* Exiqus button variants */
+  .btn-primary {
+    @apply rounded-md bg-gradient-to-r from-purple-600 to-blue-600 px-4 py-2 font-medium text-white transition-opacity hover:opacity-90;
+  }
+
+  .btn-secondary {
+    @apply rounded-md border border-white/[0.09] bg-white/[0.06] px-4 py-2 font-medium text-white transition-all hover:bg-white/[0.09];
+  }
+
+  .btn-ghost {
+    @apply rounded-md px-4 py-2 font-medium text-gray-400 transition-colors hover:text-white;
+  }
+
+  /* Exiqus badge */
+  .badge-exiqus {
+    @apply inline-flex items-center rounded-md px-2 py-1 text-xs font-medium;
+  }
+
+  /* Gradient text effect */
+  .text-gradient {
+    @apply bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent;
+  }
+
+  /* Subtle glow effect */
+  .glow-purple {
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.15);
+  }
+
+  .glow-blue {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.15);
+  }
+
+  .glow-green {
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.15);
+  }
+
+  .glow-subtle {
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
+  }
+
+  .glow-hover {
+    @apply transition-shadow duration-200;
+  }
+
+  .glow-hover:hover {
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.2);
+  }
+}
+
+@layer utilities {
+  /* Micro-animations */
+  .animate-fade-in {
+    animation: fadeIn 200ms ease;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 300ms ease;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      transform: translateY(10px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+}

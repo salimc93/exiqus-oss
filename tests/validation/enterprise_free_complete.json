@@ -1,0 +1,19 @@
+{
+  "context": "enterprise",
+  "tier": "free",
+  "success": true,
+  "generation_time": 61.32558536529541,
+  "context_fit_score": 0.5231071428571428,
+  "confidence_score": 0.705,
+  "total_questions": 7,
+  "questions": [
+    "Your repository shows a highly collaborative work style, with 37 CI/CD-related commits. Can you tell me more about how you approach collaboration within your team? How do you ensure effective communication and knowledge sharing?",
+    "Your repository shows that you've handled at least one major commit (over 500 lines of code). Can you tell me about your approach to tackling large-scale changes or complex technical challenges? How do you ensure you're continuously learning and improving your skills?",
+    "Your repository doesn't show any clear leadership experience or contributions. Can you tell me about any opportunities you've had to take on a leadership role, either formally or informally? How do you see your potential for growth in this area?",
+    "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+    "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+    "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+    "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588"
+  ],
+  "metrics_count": 2
+}

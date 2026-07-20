@@ -1,0 +1,22 @@
+{
+  "context": "startup",
+  "tier": "growth",
+  "success": true,
+  "generation_time": 107.60359191894531,
+  "context_fit_score": 1.0,
+  "confidence_score": 1.0,
+  "total_questions": 10,
+  "questions": [
+    "With 37 CI/CD related commits, you seem deeply invested in automation. How do you collaborate with teammates to design and implement these pipelines?",
+    "Given your high-complexity code and specialized Python background, how are you expanding your technical capabilities beyond your current expertise?",
+    "Your commits suggest a detail-oriented approach. How do you balance technical precision with team productivity and momentum?",
+    "I see you have 7 bug fix commits representing 14% of your work. Walk me through your most complex debugging experience and how you approached resolving it.",
+    "Your repository shows a consistent pattern of bug fixes. What's your systematic approach to identifying and preventing recurring issues?",
+    "Your code complexity score is 8.0/10, which suggests sophisticated but potentially challenging implementations. How do you balance architectural complexity with maintainability?",
+    "Your GitHub shows 99.9% Python usage. What drives your language specialization, and how do you evaluate when to potentially introduce another language?",
+    "With Python dominating your codebase, how do you evaluate and integrate external libraries or frameworks?",
+    "I noticed you've made one major commit with over 500 lines of change. What's your philosophy for managing large-scale refactoring or feature implementations?",
+    "Your behavioral profile suggests high collaboration but potentially low work-life balance. How do you sustainably maintain your intense work approach?"
+  ],
+  "metrics_count": 14
+}

@@ -1,0 +1,22 @@
+{
+  "context": "agency",
+  "tier": "growth",
+  "success": true,
+  "generation_time": 109.96077609062195,
+  "context_fit_score": 1.0,
+  "confidence_score": 1.0,
+  "total_questions": 10,
+  "questions": [
+    "With 37 CI/CD related commits, you seem deeply invested in automation. How do you collaborate with team members who might have different automation preferences?",
+    "Given your highly specialized Python background, what strategies are you using to expand your technical capabilities beyond your current expertise?",
+    "With your detail-oriented work style and comprehensive communication, how do you see yourself contributing to team knowledge sharing and mentorship?",
+    "I see you have 7 bug fix commits representing 14% of your work. Walk me through your most complex debugging experience and how you approached resolving it.",
+    "Your GitHub shows a highly collaborative profile. Can you describe a complex project where collaboration was critical to your success?",
+    "Your code complexity score is 8.0/10, which is quite high. How do you balance delivering complex solutions while maintaining code maintainability?",
+    "With your high code complexity and significant bug fix commits, how do you balance rapid development with maintaining code quality?",
+    "Your GitHub shows 99.9% Python usage. What drives your decision to specialize so deeply in one language, especially in an agency environment with diverse client needs?",
+    "I noticed you have one major commit with over 500 lines of change. Can you describe your approach to managing large-scale refactoring or feature implementation?",
+    "Your activity suggests an intense work style with potentially low work-life balance. How do you manage sustainable productivity without burnout?"
+  ],
+  "metrics_count": 14
+}

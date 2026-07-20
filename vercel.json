@@ -1,0 +1,80 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "nextjs",
+  "buildCommand": "cd frontend && npm run build",
+  "devCommand": "cd frontend && npm run dev",
+  "installCommand": "cd frontend && npm install",
+  "outputDirectory": "frontend/.next",
+
+  "git": {
+    "deploymentEnabled": {
+      "main": true,
+      "develop": true
+    }
+  },
+
+  "github": {
+    "enabled": true,
+    "autoAlias": true
+  },
+
+  "env": {
+    "NEXT_PUBLIC_APP_NAME": "Exiqus",
+    "NEXT_PUBLIC_APP_DESCRIPTION": "AI-powered GitHub profile analysis for smarter hiring decisions"
+  },
+
+  "build": {
+    "env": {
+      "NODE_ENV": "production"
+    }
+  },
+
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store, max-age=0"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        }
+      ]
+    }
+  ],
+
+  "redirects": [
+    {
+      "source": "/github",
+      "destination": "https://github.com/salimc93/exiqus",
+      "permanent": false
+    }
+  ],
+
+  "regions": ["iad1"],
+
+  "functions": {
+    "app/api/[...route]/route.ts": {
+      "maxDuration": 30
+    }
+  }
+}

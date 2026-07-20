@@ -1,0 +1,209 @@
+# PEP 621 - Standard Python project metadata
+[project]
+name = "exiqus"
+version = "0.1.0"
+description = "AI-powered developer assessment platform for technical recruiting"
+authors = [
+    {name = "Salim C"}
+]
+maintainers = [
+    {name = "Salim C"}
+]
+readme = "README.md"
+license = {text = "AGPL-3.0-only"}
+requires-python = ">=3.10"
+keywords = ["exiqus", "developer", "assessment", "recruiting", "ai", "github", "analysis"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Information Technology",
+    "Topic :: Software Development :: Quality Assurance",
+    "License :: OSI Approved :: GNU Affero General Public License v3",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+[project.urls]
+Homepage = "https://github.com/salimc93/exiqus"
+Repository = "https://github.com/salimc93/exiqus"
+Documentation = "https://github.com/salimc93/exiqus#readme"
+
+[project.scripts]
+exiqus = "github_analyzer.cli.main:main"
+eq = "github_analyzer.cli.main:main"
+
+
+# Poetry configuration (for dependency management)
+[tool.poetry]
+name = "exiqus"
+version = "0.1.0"
+description = "AI-powered developer assessment platform for technical recruiting"
+authors = ["Salim C"]
+packages = [{include = "github_analyzer", from = "src"}]
+# TODO: Update to exiqus after code migration
+
+[tool.poetry.dependencies]
+python = ">=3.10,<4.0"
+PyGithub = "^1.59.1"
+anthropic = "^0.57.1"
+python-dotenv = "^1.0.0"
+pandas = "^2.1.4"
+fastapi = "^0.123.7"
+uvicorn = "^0.24.0"
+redis = "^5.0.1"
+sqlalchemy = "^2.0.23"
+asyncpg = "^0.29.0"
+psycopg2-binary = "^2.9.9"
+bcrypt = "^4.1.2"
+cryptography = ">=44.0.1"
+httpx = "^0.25.2"
+aiofiles = "^23.2.1"
+requests = "^2.31.0"
+typing-extensions = "^4.8.0"
+click = "^8.1.7"
+rich = "^13.7.0"
+pyyaml = "^6.0.1"
+jsonschema = "^4.20.0"
+gitpython = "^3.1.40"
+pygments = "^2.17.2"
+pydantic = {extras = ["email"], version = "^2.11.7"}
+# Security updates to address vulnerabilities
+anyio = ">=4.4.0"
+starlette = "^0.49.1"  
+pyjwt = ">=2.10.1"
+stripe = "^11.0.0"
+resend = "^2.11.0"
+tenacity = "^9.1.2"
+reportlab = "^4.4.3"
+alembic = "^1.16.5"
+disposable-email-domains = "^0.0.137"
+authlib = "^1.6.4"
+fastapi-guard = {version = ">=4.2.2", python = ">=3.10,<3.15"}
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.3"
+pytest-asyncio = "^0.21.1"
+pytest-cov = "^4.1.0"
+pytest-mock = "^3.12.0"
+mypy = "^1.7.0"
+pre-commit = "^3.5.0"
+types-pyyaml = "^6.0.12.20250516"
+safety = "^3.2.0"
+marshmallow = ">=3.15.0,<4.0.0"
+freezegun = "^1.5.2"
+psutil = "^7.0.0"
+types-psutil = "^7.0.0.20250601"
+types-colorama = "^0.4.15.20240311"
+types-reportlab = "^4.4.1.20250822"
+types-requests = "^2.32.4.20250913"
+pytest-timeout = "^2.4.0"
+testcontainers = {extras = ["postgres"], version = "^4.14.2"}
+ruff = "^0.15.22"
+
+[tool.poetry.group.docs.dependencies]
+sphinx = "^7.1.0"
+sphinx-rtd-theme = "^1.3.0"
+myst-parser = "^2.0.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+# Pytest configuration
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = [
+    "--strict-markers",
+    "--strict-config",
+    "--cov=src/github_analyzer",
+    "--cov-report=term-missing",
+    "--cov-report=html",
+    "--cov-report=xml",
+    "--ignore=test_repos",
+]
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+norecursedirs = ["tests/validation", "scripts"]
+asyncio_mode = "auto"
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests as integration tests",
+    "unit: marks tests as unit tests",
+    "api: marks tests that require API access",
+]
+filterwarnings = [
+    "ignore:The stripe.api_resources.error_object package is deprecated:DeprecationWarning:stripe.*:",
+]
+
+# Coverage configuration
+[tool.coverage.run]
+source = ["src/github_analyzer"]
+omit = [
+    "*/tests/*",
+    "*/test_*",
+    "*/__init__.py",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:",
+    "class .*\\bProtocol\\):",
+    "@(abc\\.)?abstractmethod",
+]
+
+# MyPy configuration
+# Ruff - formatter + linter (replaces black, isort, flake8, bandit)
+[tool.ruff]
+line-length = 88
+target-version = "py311"
+extend-exclude = ["archive", "validation", "test_repos", "migrations"]
+
+[tool.ruff.lint]
+# E/W (pycodestyle), F (pyflakes), I (isort), S (bandit)
+select = ["E", "W", "F", "I", "S"]
+ignore = [
+    "E203",  # whitespace before ':' (formatter-compatible)
+    "E501",  # line length is handled by the formatter
+]
+
+[tool.ruff.lint.per-file-ignores]
+# Tests legitimately use asserts, hardcoded test credentials, etc.
+"tests/**" = ["S"]
+"scripts/**" = ["S"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+exclude = ["test_repos/", "tests/validation/", "validation/"]
+disable_error_code = ["misc"]
+
+[[tool.mypy.overrides]]
+module = [
+    "yaml.*",
+    "stripe.*",
+    "openai.*",
+    "anthropic.*",
+    "groq.*",
+    "google.generativeai.*",
+    "mistralai.*",
+    "github.*",
+    "pandas.*",
+    "redis.*",
+    "jwt.*",
+    "bcrypt.*",
+]
+ignore_missing_imports = true
+
+

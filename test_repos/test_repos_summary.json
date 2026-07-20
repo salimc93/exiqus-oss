@@ -1,0 +1,55 @@
+{
+  "generated_at": "2025-06-14T19:27:58.689489",
+  "repositories": [
+    {
+      "name": "perfect-repo",
+      "path": "test_repos/perfect-repo",
+      "description": "The 'Gold Standard' repository"
+    },
+    {
+      "name": "beginner-learning",
+      "path": "test_repos/beginner-learning",
+      "description": "Beginner's learning journey repository"
+    },
+    {
+      "name": "abandoned-project",
+      "path": "test_repos/abandoned-project",
+      "description": "Repository that started strong but was abandoned"
+    },
+    {
+      "name": "poor-practices",
+      "path": "test_repos/poor-practices",
+      "description": "Repository with poor coding practices"
+    },
+    {
+      "name": "empty-readme",
+      "path": "test_repos/empty-readme",
+      "description": "Repository with minimal/empty documentation"
+    },
+    {
+      "name": "inconsistent-commits",
+      "path": "test_repos/inconsistent-commits",
+      "description": "Repository with inconsistent commit patterns"
+    },
+    {
+      "name": "no-tests",
+      "path": "test_repos/no-tests",
+      "description": "Production-like code with zero tests"
+    },
+    {
+      "name": "copy-paste-tutorial",
+      "path": "test_repos/copy-paste-tutorial",
+      "description": "Repository that's clearly copy-pasted tutorial code"
+    },
+    {
+      "name": "excellent-docs",
+      "path": "test_repos/excellent-docs",
+      "description": "Repository with exceptional documentation"
+    },
+    {
+      "name": "monorepo",
+      "path": "test_repos/monorepo",
+      "description": "Large monorepo with multiple projects"
+    }
+  ]
+}
