@@ -464,8 +464,20 @@ class StripeClient:
             Parsed webhook event
 
         Raises:
-            StripeClientError: If signature verification fails
+            StripeClientError: If the secret is missing or verification fails
         """
+        # Fail closed. Stripe's construct_event will happily verify against an
+        # empty secret, and an attacker who guesses the deployment is
+        # misconfigured can then forge any event - including subscription
+        # upgrades. A missing secret must never be treated as "no signing".
+        if not webhook_secret:
+            logger.error(
+                "STRIPE_WEBHOOK_SECRET is not configured; refusing to process "
+                "webhook. Set it to the signing secret from your Stripe "
+                "endpoint configuration."
+            )
+            raise StripeClientError("Webhook secret is not configured")
+
         try:
             event = stripe.Webhook.construct_event(payload, signature, webhook_secret)  # type: ignore[no-untyped-call]
 
@@ -893,8 +905,15 @@ class StripeClient:
             Verified webhook event
 
         Raises:
-            StripeClientError: If verification fails
+            StripeClientError: If the secret is missing or verification fails
         """
+        # See verify_webhook_signature: an empty secret still "verifies".
+        if not webhook_secret:
+            logger.error(
+                "STRIPE_WEBHOOK_SECRET is not configured; refusing to process webhook."
+            )
+            raise StripeClientError("Webhook secret is not configured")
+
         try:
             event = stripe.Webhook.construct_event(payload, signature, webhook_secret)  # type: ignore[no-untyped-call]
             return dict(event)

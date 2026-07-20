@@ -277,6 +277,23 @@ class TestStripeClient:
             assert result["id"] == "evt_test123"
             assert result["type"] == "test.event"
 
+    async def test_verify_webhook_signature_rejects_empty_secret(self, stripe_client):
+        """An unconfigured webhook secret must fail closed, not verify.
+
+        stripe.Webhook.construct_event will successfully verify a payload
+        signed with an empty key, so a deployment missing
+        STRIPE_WEBHOOK_SECRET would otherwise accept forged events.
+        """
+        payload = b'{"type": "customer.subscription.created"}'
+        signature = "t=1,v1=anything"
+
+        with patch("stripe.Webhook.construct_event") as construct:
+            with pytest.raises(StripeClientError, match="not configured"):
+                stripe_client.verify_webhook_signature(payload, signature, "")
+
+            # Must reject before ever reaching Stripe's verification.
+            construct.assert_not_called()
+
     async def test_verify_webhook_signature_invalid(self, stripe_client):
         """Test invalid webhook signature verification."""
         payload = b'{"test": "data"}'
