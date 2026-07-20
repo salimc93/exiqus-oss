@@ -450,7 +450,7 @@ jobs:
           docker run --rm -e GITHUB_TOKEN=ghp_test_token_for_ci_only -e ANTHROPIC_API_KEY=sk-ant-api-test-key-for-ci_only ${{ fromJSON(steps.meta.outputs.json).tags[0] }} python -c "from src.github_analyzer.api import main; print('✅ Docker image test passed')"
           
       - name: Upload build artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: package-artifacts
           path: dist/
