@@ -79,7 +79,7 @@ resend = "^2.11.0"
 tenacity = "^9.1.2"
 reportlab = "^4.4.3"
 alembic = "^1.16.5"
-disposable-email-domains = "^0.0.226"
+disposable-email-domains = ">=0.0.226,<0.0.228"
 authlib = "^1.6.4"
 fastapi-guard = {version = "^7.3.0", python = ">=3.10,<3.15"}
 
