@@ -52,9 +52,6 @@ jobs:
         run: |
           poetry install --with dev
           
-      - name: Check for known vulnerabilities
-        run: poetry run safety check --json > safety-report.json
-
       - name: Lint and security rules with Ruff
         run: poetry run ruff check src/ tests/ scripts/
 
@@ -63,14 +60,6 @@ jobs:
 
       - name: Type checking with mypy
         run: poetry run mypy src/github_analyzer/
-
-      - name: Upload security reports
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: security-reports
-          path: |
-            safety-report.json
 
   # Frontend Linting and Type Checking
   frontend-checks:

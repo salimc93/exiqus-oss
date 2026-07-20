@@ -1,0 +1,40 @@
+version: 2
+
+# test_repos/ holds deliberately outdated fixture projects used to exercise
+# the analyzer (an abandoned Flask app, a tutorial copy-paste repo, and so
+# on). Their stale dependencies are the point, so they are not listed here
+# and Dependabot leaves them alone.
+
+updates:
+  # Backend (Poetry) - root pyproject.toml only
+  - package-ecosystem: pip
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    labels:
+      - dependencies
+      - backend
+
+  # Frontend (npm)
+  - package-ecosystem: npm
+    directory: /frontend
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    labels:
+      - dependencies
+      - frontend
+    groups:
+      # Batch routine dev-tooling bumps into one PR rather than many
+      dev-dependencies:
+        dependency-type: development
+
+  # Keep the Actions in the workflows current
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    labels:
+      - dependencies
+      - ci
