@@ -17,16 +17,17 @@ number.
 
 ## See It Running
 
-[![Watch the Exiqus demo](frontend/public/demo-poster.jpg)](frontend/public/demo-video.mp4)
+![Exiqus walking through a portfolio analysis](frontend/public/demo-preview.webp)
 
-**[▶ Watch the full walkthrough (2m 38s)](frontend/public/demo-video.mp4)**
+**[▶ Download the full walkthrough (2m 38s, 13MB)](https://github.com/salimc93/exiqus-oss/releases/download/v1.0.0/demo-video.mp4)**
 
-A recording of the production application, which is what you get when
-you run this repo locally: kicking off a portfolio analysis, the
-Candidate Intelligence Hub, portfolio evolution over time, the evidence
-and observations tabs, and the generated interview questions with their
-supporting evidence. Everything shown is in this repository. There is
-no hosted service behind it.
+Above: the evidence and interview tabs of a portfolio analysis. The full
+recording covers the whole workflow, from kicking off an analysis through
+the Candidate Intelligence Hub to the generated interview questions and
+their supporting evidence.
+
+This is the production application, which is what you get when you run
+this repo locally. There is no hosted service behind it.
 
 ## Why I Built This
 
