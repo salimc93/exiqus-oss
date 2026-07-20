@@ -71,12 +71,22 @@ class TestCostTracker:
         assert abs(cost - expected_cost) < 0.0001
 
     def test_calculate_cost_unknown_model(self, cost_tracker):
-        """Test cost calculation for unknown model - should use Haiku pricing as fallback."""
+        """An unpriced model bills at the highest known rate, not the lowest.
+
+        The model is configurable, so an operator can point ANTHROPIC_MODEL at
+        something newer than this table. Falling back to the cheapest entry
+        would under-report spend - the dangerous direction for a budget guard -
+        so the fallback is deliberately the most expensive rate.
+        """
         cost = cost_tracker.calculate_cost("unknown-model", 1000, 500)
 
-        # Should fall back to Haiku pricing
-        expected_cost = (1000 * 0.00025 + 500 * 0.00125) / 1000  # Haiku pricing
+        pricing = cost_tracker.UNKNOWN_MODEL_PRICING
+        expected_cost = (1000 * pricing["input"] + 500 * pricing["output"]) / 1000
         assert abs(cost - expected_cost) < 0.0001
+
+        # And it must exceed every rate we do know about.
+        cheapest = min(p["input"] for p in cost_tracker.MODEL_PRICING.values())
+        assert pricing["input"] > cheapest
 
     def test_get_daily_usage(self, cost_tracker):
         """Test daily usage calculation."""

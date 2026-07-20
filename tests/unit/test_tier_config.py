@@ -5,12 +5,16 @@ Tests the centralized tier configuration system that manages
 all subscription tier settings including pricing, models, and limits.
 """
 
+import pytest
+
 from github_analyzer.core.tier_config import (
+    get_configured_model,
     get_model_for_tier,
     get_tier_config,
     get_token_limit,
     scale_plus_token_allocator,
 )
+from github_analyzer.utils.config import DEFAULT_ANTHROPIC_MODEL
 
 
 class TestTierConfiguration:
@@ -24,7 +28,6 @@ class TestTierConfiguration:
             assert config is not None
             assert config.monthly_price >= 0
             assert config.analyses_per_month > 0
-            assert config.main_model is not None
             assert config.main_generation_tokens > 0
             assert config.unified_approach_tokens > 0
 
@@ -96,64 +99,53 @@ class TestTierConfiguration:
 
 
 class TestModelConfiguration:
-    """Test model selection for different tiers."""
+    """Model selection resolves from configuration, not from the tier."""
 
-    def test_get_model_for_tier_main(self) -> None:
-        """Test getting main model for each tier."""
-        assert (
-            get_model_for_tier("free", "main") == "claude-3-5-haiku-20241022"
-        )  # Haiku 3.5
-        assert (
-            get_model_for_tier("basic", "main") == "claude-haiku-4-5-20251001"
-        )  # Haiku 4.5
-        assert (
-            get_model_for_tier("professional", "main") == "claude-haiku-4-5-20251001"
-        )  # Haiku 4.5
-        assert (
-            get_model_for_tier("enterprise", "main") == "claude-sonnet-4-20250514"
-        )  # Sonnet 4
-        assert (
-            get_model_for_tier("scale_plus", "main") == "claude-sonnet-4-20250514"
-        )  # Sonnet 4 for main analysis
+    def test_all_tiers_resolve_to_the_configured_model(
+        self, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        """Every tier and model type uses ANTHROPIC_MODEL by default.
 
-    def test_get_model_for_tier_metrics(self) -> None:
-        """Test getting metrics model for tiers that support it."""
-        # All tiers now use single model (no separate metrics model)
-        assert get_model_for_tier("free", "metrics") == "claude-3-5-haiku-20241022"
-        assert get_model_for_tier("basic", "metrics") == "claude-haiku-4-5-20251001"
-        assert (
-            get_model_for_tier("professional", "metrics") == "claude-haiku-4-5-20251001"
-        )
-        assert (
-            get_model_for_tier("enterprise", "metrics") == "claude-sonnet-4-20250514"
-        )  # Sonnet 4
-        assert (
-            get_model_for_tier("scale_plus", "metrics")
-            == "claude-sonnet-4-20250514"  # Sonnet 4
-        )
+        Tiers ship with no model overrides, so a deployment picks one model and
+        it applies everywhere. This is the behaviour that replaced the old
+        per-tier model pinning from the SaaS era.
+        """
+        monkeypatch.setenv("ANTHROPIC_MODEL", "claude-test-model")
 
-    def test_get_model_for_tier_questions(self) -> None:
-        """Test getting questions model for tiers that support it."""
-        # Most tiers use single model, Scale+ uses hybrid with Sonnet 4.5 for questions
-        assert get_model_for_tier("free", "questions") == "claude-3-5-haiku-20241022"
-        assert get_model_for_tier("basic", "questions") == "claude-haiku-4-5-20251001"
-        assert (
-            get_model_for_tier("professional", "questions")
-            == "claude-haiku-4-5-20251001"
-        )
-        assert (
-            get_model_for_tier("enterprise", "questions")
-            == "claude-sonnet-4-20250514"  # Sonnet 4
-        )
-        assert (
-            get_model_for_tier("scale_plus", "questions")
-            == "claude-sonnet-4-5-20250929"  # Sonnet 4.5 for questions (hybrid)
-        )
+        for tier in ["free", "basic", "professional", "enterprise", "scale_plus"]:
+            for model_type in ["main", "metrics", "questions"]:
+                assert get_model_for_tier(tier, model_type) == "claude-test-model"
 
-    def test_get_model_for_invalid_tier(self) -> None:
-        """Test model fallback for invalid tier."""
-        # Should fall back to free tier model
-        assert get_model_for_tier("invalid", "main") == "claude-3-5-haiku-20241022"
+    def test_unset_env_falls_back_to_the_documented_default(
+        self, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        """With no ANTHROPIC_MODEL set, the shared default applies."""
+        monkeypatch.delenv("ANTHROPIC_MODEL", raising=False)
+
+        assert get_configured_model() == DEFAULT_ANTHROPIC_MODEL
+        assert get_model_for_tier("professional") == DEFAULT_ANTHROPIC_MODEL
+
+    def test_unknown_tier_still_resolves(self, monkeypatch: pytest.MonkeyPatch) -> None:
+        """An unrecognised tier gets the configured model, not an error."""
+        monkeypatch.setenv("ANTHROPIC_MODEL", "claude-test-model")
+
+        assert get_model_for_tier("no-such-tier") == "claude-test-model"
+
+    def test_explicit_tier_override_wins_over_env(
+        self, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        """A tier that sets a model explicitly keeps it.
+
+        No shipped tier does this, but the capability is retained so an operator
+        can put one call site on a cheaper model.
+        """
+        monkeypatch.setenv("ANTHROPIC_MODEL", "claude-test-model")
+        config = get_tier_config("free")
+        assert config is not None
+        monkeypatch.setattr(config, "questions_model", "claude-cheaper-model")
+
+        assert get_model_for_tier("free", "questions") == "claude-cheaper-model"
+        assert get_model_for_tier("free", "main") == "claude-test-model"
 
 
 class TestTokenLimits:
@@ -292,30 +284,17 @@ class TestPricingUpdates:
 
 
 class TestModelAssignments:
-    """Test critical model assignments."""
+    """Tiers must not pin models; that is a deployment choice."""
 
-    def test_scale_tier_uses_sonnet_4(self) -> None:
-        """Test that Scale tier uses Sonnet 4."""
-        scale = get_tier_config("enterprise")
-        assert scale is not None
-        assert scale.main_model == "claude-sonnet-4-20250514"
-        assert "sonnet-4" in scale.main_model
+    def test_no_tier_hardcodes_a_model(self) -> None:
+        """Shipped tiers leave all three model fields unset.
 
-    def test_scale_plus_uses_hybrid(self) -> None:
-        """Test that Scale+ tier uses Sonnet 4 + 4.5 hybrid approach."""
-        # Growth uses Haiku 4.5
-        professional = get_tier_config("professional")
-        assert professional is not None
-        assert professional.main_model == "claude-haiku-4-5-20251001"
-
-        # Scale uses Sonnet 4
-        enterprise = get_tier_config("enterprise")
-        assert enterprise is not None
-        assert enterprise.main_model == "claude-sonnet-4-20250514"  # Sonnet 4
-
-        # Scale+ uses Sonnet 4 for main + Sonnet 4.5 for questions (hybrid)
-        scale_plus = get_tier_config("scale_plus")
-        assert scale_plus is not None
-        assert scale_plus.main_model == "claude-sonnet-4-20250514"  # Sonnet 4
-        assert scale_plus.questions_model == "claude-sonnet-4-5-20250929"  # Sonnet 4.5
-        assert "sonnet-4" in scale_plus.main_model
+        A hardcoded model here would silently override ANTHROPIC_MODEL and can
+        rot into a retired model ID that returns 404.
+        """
+        for tier in ["free", "basic", "professional", "enterprise", "scale_plus"]:
+            config = get_tier_config(tier)
+            assert config is not None
+            assert config.main_model is None, f"{tier} pins a main model"
+            assert config.metrics_model is None, f"{tier} pins a metrics model"
+            assert config.questions_model is None, f"{tier} pins a questions model"

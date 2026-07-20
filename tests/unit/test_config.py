@@ -10,7 +10,12 @@ from unittest.mock import patch
 
 import pytest
 
-from github_analyzer.utils.config import Config, get_config, reload_config
+from github_analyzer.utils.config import (
+    DEFAULT_ANTHROPIC_MODEL,
+    Config,
+    get_config,
+    reload_config,
+)
 
 
 class TestConfig:
@@ -82,7 +87,7 @@ class TestConfig:
             # Test default values
             assert config.analysis.template_threshold_days == 730
             assert config.analysis.min_commits_for_ai == 3
-            assert config.analysis.anthropic_model == "claude-3-haiku-20240307"
+            assert config.analysis.anthropic_model == DEFAULT_ANTHROPIC_MODEL
             assert config.analysis.max_tokens == 1000
             assert config.analysis.analysis_timeout == 45
             assert config.analysis.temperature == 0.0

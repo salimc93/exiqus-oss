@@ -15,8 +15,20 @@ This module contains all subscription tier configurations including:
 NO OTHER MODULE should define tier-specific settings.
 """
 
+import os
 from dataclasses import dataclass, field
 from typing import Any, Callable, Dict, Optional, Tuple
+
+from ..utils.config import DEFAULT_ANTHROPIC_MODEL
+
+
+def get_configured_model() -> str:
+    """Return the Anthropic model this deployment should use.
+
+    Reads ANTHROPIC_MODEL at call time rather than import time, so tests and
+    long-running processes can change it without reimporting the module.
+    """
+    return os.getenv("ANTHROPIC_MODEL", DEFAULT_ANTHROPIC_MODEL)
 
 
 @dataclass
@@ -28,14 +40,14 @@ class TierConfiguration:
     annual_price: int
     analyses_per_month: int
 
-    # AI Models
-    main_model: str
-
     # Token Limits
     main_generation_tokens: int
     unified_approach_tokens: int
 
-    # Optional AI Models
+    # AI model overrides. All default to None, meaning "use the model from
+    # ANTHROPIC_MODEL". Set one only if you deliberately want a given tier or
+    # call site on a different model - e.g. a cheaper one for bulk work.
+    main_model: Optional[str] = None
     metrics_model: Optional[str] = None
     questions_model: Optional[str] = None
 
@@ -78,7 +90,6 @@ TIER_CONFIGURATIONS = {
         monthly_price=0,
         annual_price=0,
         analyses_per_month=10,
-        main_model="claude-3-5-haiku-20241022",  # Haiku 3.5 for single repo analysis
         main_generation_tokens=8000,  # Max for Haiku 3.5
         unified_approach_tokens=8000,  # Max tokens for Haiku 3.5
         max_insights=3,
@@ -102,7 +113,6 @@ TIER_CONFIGURATIONS = {
         monthly_price=49,
         annual_price=490,
         analyses_per_month=10,  # 10 candidate assessments per month
-        main_model="claude-haiku-4-5-20251001",  # UPGRADED: Haiku 4.5 for portfolio analysis
         main_generation_tokens=16000,  # Leverage 64K output capacity
         unified_approach_tokens=16000,  # Full portfolio analysis support
         max_insights=10,  # Fixed for all repos
@@ -129,9 +139,6 @@ TIER_CONFIGURATIONS = {
         annual_price=1990,
         analyses_per_month=50,  # 50 candidate assessments per month
         # UPGRADED: Single-model approach with Haiku 4.5 (64K output!)
-        main_model="claude-haiku-4-5-20251001",  # Haiku 4.5 - 64K output capacity
-        metrics_model=None,  # REMOVED: Single model for all operations
-        questions_model=None,  # REMOVED: Single model for all operations
         main_generation_tokens=16000,  # INCREASED: Leverage 64K capacity
         unified_approach_tokens=16000,  # INCREASED: Richer outputs with 2x capacity
         max_insights=15,  # With 64K output, can generate more
@@ -161,9 +168,6 @@ TIER_CONFIGURATIONS = {
         annual_price=4990,
         analyses_per_month=200,  # 200 candidate assessments per month
         # UPGRADED: Sonnet 4 for premium intelligence
-        main_model="claude-sonnet-4-20250514",  # Sonnet 4 - High intelligence
-        metrics_model=None,  # REMOVED: Clean single-model approach
-        questions_model=None,  # REMOVED: Clean single-model approach
         main_generation_tokens=20000,  # INCREASED: Premium analysis with more capacity
         unified_approach_tokens=20000,  # INCREASED: Comprehensive outputs
         max_insights=18,
@@ -197,9 +201,6 @@ TIER_CONFIGURATIONS = {
         annual_price=25000,
         analyses_per_month=500,  # 500 candidate assessments per month
         # HYBRID: Sonnet 4 for main analysis + Sonnet 4.5 for questions
-        main_model="claude-sonnet-4-20250514",  # Sonnet 4 for main analysis
-        metrics_model=None,  # REMOVED: Single model cleaner
-        questions_model="claude-sonnet-4-5-20250929",  # Sonnet 4.5 for deep questions
         main_generation_tokens=32000,  # INCREASED: Maximum depth with 64K capacity
         unified_approach_tokens=32000,  # INCREASED: Comprehensive analysis
         use_smart_allocation=True,
@@ -257,7 +258,11 @@ def get_tier_config(tier: str) -> Optional[TierConfiguration]:
 
 def get_model_for_tier(tier: str, model_type: str = "main") -> str:
     """
-    Get the appropriate AI model for a tier.
+    Get the AI model to use for a tier.
+
+    Returns the model from ANTHROPIC_MODEL unless this tier sets an explicit
+    override for the requested model type. Tiers ship with no overrides, so by
+    default every tier and model type resolves to the same configured model.
 
     Args:
         tier: Tier name
@@ -268,15 +273,13 @@ def get_model_for_tier(tier: str, model_type: str = "main") -> str:
     """
     config = get_tier_config(tier)
     if not config:
-        # Fallback to free tier model
-        return TIER_CONFIGURATIONS["free"].main_model
+        return get_configured_model()
 
     if model_type == "metrics" and config.metrics_model:
         return config.metrics_model
-    elif model_type == "questions" and config.questions_model:
+    if model_type == "questions" and config.questions_model:
         return config.questions_model
-    else:
-        return config.main_model
+    return config.main_model or get_configured_model()
 
 
 def get_token_limit(tier: str, limit_type: str = "main") -> int:

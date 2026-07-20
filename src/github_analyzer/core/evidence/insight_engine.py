@@ -18,7 +18,7 @@ import anthropic
 
 from ...utils.config import get_config
 from ...utils.logging import get_logger
-from ..tier_config import get_tier_config
+from ..tier_config import get_model_for_tier
 
 logger = get_logger(__name__)
 
@@ -172,16 +172,9 @@ class InsightEngine:
         self.insight_counts = {}  # Will be populated from tier_config
 
         for tier_name in ["free", "basic", "professional", "enterprise", "scale_plus"]:
-            tier_cfg = get_tier_config(tier_name)
-            if tier_cfg:
-                # Use metrics model for insights, fallback to main model
-                self.model_config[tier_name] = (
-                    tier_cfg.metrics_model or tier_cfg.main_model
-                )
-            else:
-                self.model_config[tier_name] = (
-                    "claude-3-haiku-20240307"  # Default fallback
-                )
+            # Resolve through tier_config so ANTHROPIC_MODEL is honoured; the
+            # tier only contributes a model if it sets an explicit override.
+            self.model_config[tier_name] = get_model_for_tier(tier_name, "metrics")
 
             # Get insight counts from centralized tier_config
             limits = get_output_limits(tier_name)

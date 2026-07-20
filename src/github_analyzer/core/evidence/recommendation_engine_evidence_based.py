@@ -16,7 +16,7 @@ import anthropic
 
 from ...utils.config import get_config
 from ...utils.logging import get_logger
-from ..tier_config import get_tier_config
+from ..tier_config import get_model_for_tier
 
 logger = get_logger(__name__)
 
@@ -79,12 +79,9 @@ class EvidenceBasedRecommendationEngine:
 
         # Build configuration from tier_config
         for tier_name in ["free", "basic", "professional", "enterprise", "scale_plus"]:
-            tier_cfg = get_tier_config(tier_name)
-            if tier_cfg:
-                # Use metrics model for recommendations
-                self.model_config[tier_name] = (
-                    tier_cfg.metrics_model or tier_cfg.main_model
-                )
+            # Resolve through tier_config so ANTHROPIC_MODEL is honoured; the
+            # tier only contributes a model if it sets an explicit override.
+            self.model_config[tier_name] = get_model_for_tier(tier_name, "metrics")
 
             # Get recommendation limits from centralized tier_config
             limits = get_output_limits(tier_name)

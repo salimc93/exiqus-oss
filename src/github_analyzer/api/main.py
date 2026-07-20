@@ -15,8 +15,8 @@ from typing import AsyncGenerator
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
-from guard.middleware import SecurityMiddleware
-from guard.models import SecurityConfig as GuardSecurityConfig
+from guard import SecurityConfig as GuardSecurityConfig
+from guard import SecurityMiddleware
 
 from ..database.connection import AsyncSessionLocal, close_database, init_database
 from ..utils.config import get_config

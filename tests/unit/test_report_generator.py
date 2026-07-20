@@ -23,6 +23,7 @@ from github_analyzer.core.report_generator import (
     SectionAssessment,
     StructuredReport,
 )
+from github_analyzer.core.tier_config import get_model_for_tier
 from github_analyzer.data.models import (
     FileInfo,
     RepositoryData,
@@ -666,10 +667,10 @@ Repository shows signs of abandonment with no recent activity or maintenance.
             # Just verify context is set correctly
 
     @patch("anthropic.Anthropic")
-    def test_dual_model_for_premium_tiers(
+    def test_all_tiers_use_the_configured_model(
         self, mock_anthropic, report_generator, high_quality_repo, classification_ai
     ):
-        """Test dual-model implementation for PROFESSIONAL and ENTERPRISE tiers."""
+        """All tiers call the configured model, not a per-tier pinned one."""
         # Mock Anthropic client
         mock_client = mock_anthropic.return_value
         from unittest.mock import Mock
@@ -687,46 +688,38 @@ Repository shows signs of abandonment with no recent activity or maintenance.
             subscription_plan=SubscriptionPlan.PROFESSIONAL,
         )
 
-        # Check calls for PROFESSIONAL tier
-        pro_calls = mock_client.messages.create.call_args_list
-
-        # Should have calls to Haiku 4.5 (single model for all operations)
-        haiku_45_calls = [
-            call
-            for call in pro_calls
-            if call.kwargs.get("model") == "claude-haiku-4-5-20251001"
-        ]
-
-        # PROFESSIONAL uses Haiku 4.5 for metrics (upgraded single-model approach)
-        assert len(haiku_45_calls) > 0, (
-            "PROFESSIONAL tier should use Haiku 4.5 for all operations"
+        # Every call for this tier goes to the configured model.
+        expected_pro = get_model_for_tier("professional")
+        pro_models = {
+            call.kwargs.get("model")
+            for call in mock_client.messages.create.call_args_list
+        }
+        assert pro_models, "PROFESSIONAL tier made no model calls"
+        assert pro_models == {expected_pro}, (
+            f"PROFESSIONAL tier called {pro_models}, expected only {expected_pro}"
         )
-        # Questions are generated with same Haiku 4.5 model (single-model approach)
 
-        # Clear for next test
         mock_client.messages.create.reset_mock()
 
-        # Test ENTERPRISE/SCALE tier (Sonnet 4 single-model approach)
         report_ent = report_generator.generate_report(
             high_quality_repo,
             classification_ai,
             subscription_plan=SubscriptionPlan.ENTERPRISE,
         )
 
-        # Check calls for ENTERPRISE tier
-        ent_calls = mock_client.messages.create.call_args_list
-
-        # Find calls with Sonnet 4 model
-        sonnet_4_ent_calls = [
-            call
-            for call in ent_calls
-            if call.kwargs.get("model") == "claude-sonnet-4-20250514"
-        ]
-
-        # ENTERPRISE tier should use Sonnet 4 for all operations (single-model approach)
-        assert len(sonnet_4_ent_calls) > 0, (
-            "ENTERPRISE tier should use Sonnet 4 model for all operations"
+        # Enterprise resolves to the same configured model - the tier no longer
+        # selects one. This is the regression guard against reintroducing
+        # per-tier pinning.
+        expected_ent = get_model_for_tier("enterprise")
+        ent_models = {
+            call.kwargs.get("model")
+            for call in mock_client.messages.create.call_args_list
+        }
+        assert ent_models, "ENTERPRISE tier made no model calls"
+        assert ent_models == {expected_ent}, (
+            f"ENTERPRISE tier called {ent_models}, expected only {expected_ent}"
         )
+        assert expected_ent == expected_pro
 
         # Verify both reports were generated successfully
         assert report_pro.repository_name == "user/awesome-project"

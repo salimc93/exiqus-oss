@@ -147,9 +147,15 @@ class TestStringUtilities:
 class TestCostCalculation:
     """Test cost calculation utilities."""
 
-    def test_calculate_cost_haiku(self):
-        """Test cost calculation for Claude Haiku model."""
-        # Based on actual Haiku pricing: $0.25/1M input, $1.25/1M output
+    def test_calculate_cost_for_an_explicit_model(self):
+        """Cost scales linearly with tokens at that model's published rate.
+
+        The model is passed explicitly: calculate_cost() defaults to whatever
+        ANTHROPIC_MODEL is set to, which is a deployment choice and not
+        something to pin arithmetic assertions to.
+        """
+        # Haiku 3.0: $0.25/1M input, $1.25/1M output
+        model = "claude-3-haiku-20240307"
         test_cases = [
             (1000, 1000, 0.00025 + 0.00125),  # 1K tokens each
             (0, 0, 0.0),  # No tokens
@@ -158,16 +164,31 @@ class TestCostCalculation:
         ]
 
         for input_tokens, output_tokens, expected_cost in test_cases:
-            result = calculate_cost(input_tokens, output_tokens)
+            result = calculate_cost(input_tokens, output_tokens, model)
             assert abs(result - expected_cost) < 0.000001, (
                 f"Cost calculation failed for {input_tokens}/{output_tokens}"
             )
 
+    def test_calculate_cost_defaults_to_the_configured_model(self):
+        """With no model argument, pricing follows ANTHROPIC_MODEL."""
+        from github_analyzer.ai.cost_tracker import CostTracker
+        from github_analyzer.core.tier_config import get_configured_model
+
+        configured = get_configured_model()
+        assert calculate_cost(1000, 1000) == calculate_cost(1000, 1000, configured)
+        assert configured in CostTracker.MODEL_PRICING
+
     def test_calculate_cost_unknown_model(self):
-        """Test cost calculation falls back to Haiku for unknown models."""
+        """An unpriced model costs at least as much as any model we know.
+
+        Over-reporting an unknown model is safe; under-reporting hides spend.
+        """
+        from github_analyzer.ai.cost_tracker import CostTracker
+
         result = calculate_cost(1000, 1000, "unknown-model")
-        expected = calculate_cost(1000, 1000, "claude-3-haiku-20240307")
-        assert result == expected
+
+        for known in CostTracker.MODEL_PRICING:
+            assert result >= calculate_cost(1000, 1000, known)
 
 
 class TestJSONUtilities:
