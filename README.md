@@ -126,10 +126,15 @@ a CI pipeline that runs all of it.
 
 ```bash
 poetry install --with dev
-cp .env.production.example .env      # fill in your keys
+cp .env.example .env                 # then add your two API keys
 docker compose up -d postgres redis  # local database + cache
 poetry run uvicorn github_analyzer.api.main:app --reload
 ```
+
+The defaults in `.env.example` match the Docker services above, so
+`ANTHROPIC_API_KEY` and `GITHUB_TOKEN` are the only values you need to
+fill in. Deploying rather than developing? Use
+`.env.production.example` instead.
 
 ### Frontend
 

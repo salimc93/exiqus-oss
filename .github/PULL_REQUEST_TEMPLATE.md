@@ -8,4 +8,4 @@
 - [ ] `poetry run pytest tests/` passes
 - [ ] Quality gates pass (`ruff check`, `ruff format --check`, `mypy`)
 - [ ] Frontend: `npm run check-all` and `npm run build` pass (if frontend touched)
-- [ ] No scores, ratings, or verdicts introduced (evidence-based philosophy — see CONTRIBUTING.md)
+- [ ] No scores, ratings, or verdicts introduced (evidence-based philosophy, see CONTRIBUTING.md)

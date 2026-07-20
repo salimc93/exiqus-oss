@@ -323,7 +323,7 @@ export default function AdminRevenuePage() {
                         borderRadius: '8px',
                       }}
                       labelStyle={{ color: '#F3F4F6' }}
-                      formatter={(value: number | string) => [`$${value}`, 'Revenue']}
+                      formatter={(value) => [`$${value ?? 0}`, 'Revenue']}
                     />
                     <Legend wrapperStyle={{ color: '#9CA3AF' }} />
                     <Line

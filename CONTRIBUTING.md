@@ -17,7 +17,7 @@ poetry run pytest tests/          # run the test suite
 ```
 
 The test suite runs against a real PostgreSQL spun up automatically via
-testcontainers — the only requirement is a running Docker daemon. Set
+testcontainers. The only requirement is a running Docker daemon. Set
 `TEST_DATABASE_URL` to reuse an existing PostgreSQL instead (CI does
 this with a service container).
 
@@ -65,7 +65,7 @@ Conventions:
 ## The Evidence-Based Philosophy (important!)
 
 Exiqus deliberately contains **no numerical scores, ratings, or
-hire/pass verdicts** — anywhere. Reports present factual, observable
+hire/pass verdicts** anywhere. Reports present factual, observable
 evidence patterns with confidence *explanations* in prose.
 
 PRs that add scores, percentages, star ratings, verdict badges, or
@@ -78,12 +78,12 @@ in doubt: observations, not assessments; evidence, not judgment.
 2. Make your change, including tests that cover the new behavior.
 3. Ensure all quality gates above pass.
 4. Open a PR with a clear description of the problem and solution.
-5. A maintainer will review it — expect honest, constructive feedback.
+5. A maintainer will review it. Expect honest, constructive feedback.
 
 ## Reporting Bugs & Requesting Features
 
 Use the issue templates. For security vulnerabilities, **do not open a
-public issue** — see [SECURITY.md](SECURITY.md).
+public issue**. See [SECURITY.md](SECURITY.md).
 
 ## Code of Conduct
 

@@ -65,7 +65,7 @@
   "redirects": [
     {
       "source": "/github",
-      "destination": "https://github.com/salimc93/exiqus",
+      "destination": "https://github.com/salimc93/exiqus-oss",
       "permanent": false
     }
   ],
