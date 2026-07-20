@@ -192,7 +192,7 @@ jobs:
           python scripts/test_api_keys.py || echo "Expected to fail with mock keys"
           
       - name: Upload coverage reports
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v7
         if: matrix.python-version == '3.10'
         with:
           file: ./coverage.xml
