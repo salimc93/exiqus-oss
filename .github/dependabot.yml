@@ -15,6 +15,15 @@ updates:
     labels:
       - dependencies
       - backend
+    groups:
+      # One PR for routine bumps. Majors stay separate so a breaking
+      # change is never buried in a batch of fifteen.
+      backend-minor-patch:
+        patterns:
+          - "*"
+        update-types:
+          - minor
+          - patch
 
   # Frontend (npm)
   - package-ecosystem: npm
@@ -29,6 +38,11 @@ updates:
       # Batch routine dev-tooling bumps into one PR rather than many
       dev-dependencies:
         dependency-type: development
+      frontend-minor-patch:
+        dependency-type: production
+        update-types:
+          - minor
+          - patch
 
   # Keep the Actions in the workflows current
   - package-ecosystem: github-actions
