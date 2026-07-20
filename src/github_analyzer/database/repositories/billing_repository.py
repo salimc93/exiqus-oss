@@ -19,6 +19,7 @@ from ..models import (
     UsageRecord,
     User,
 )
+from ..rowcount import affected_rows
 
 
 class BillingRepository:
@@ -115,7 +116,7 @@ class BillingRepository:
         )
 
         await self.db.commit()
-        return result.rowcount > 0
+        return affected_rows(result) > 0
 
     async def get_invoices_by_status(
         self, status: str, limit: int = 50
@@ -229,7 +230,7 @@ class BillingRepository:
         )
 
         await self.db.commit()
-        return result.rowcount > 0
+        return affected_rows(result) > 0
 
     async def get_payments_by_date_range(
         self, start_date: datetime, end_date: datetime
@@ -332,7 +333,7 @@ class BillingRepository:
         )
 
         await self.db.commit()
-        return result.rowcount > 0
+        return affected_rows(result) > 0
 
     async def get_unreported_usage(self, limit: int = 100) -> List[BillingUsageRecord]:
         """Get usage records not yet reported to Stripe."""

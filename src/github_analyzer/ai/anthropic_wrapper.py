@@ -89,7 +89,7 @@ class AnthropicWrapper:
                 messages=messages,
                 max_tokens=max_tokens,
                 temperature=temperature,
-                system=system or anthropic.NOT_GIVEN,
+                system=system or anthropic.omit,
                 timeout=timeout_to_use,  # Per-request timeout
             )
 

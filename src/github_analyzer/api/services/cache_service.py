@@ -20,6 +20,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from ...database.models import PRAnalysisCache, PRAnalysisRecord
 from ...database.models_portfolio import PortfolioAnalysisCache
+from ...database.rowcount import affected_rows
 from .redis_service import redis_service
 
 logger = logging.getLogger(__name__)
@@ -62,7 +63,7 @@ async def clear_candidate_caches(username: str, user_id: str, db: AsyncSession) 
                 PortfolioAnalysisCache.github_username == username,
             )
         )
-        portfolio_cache_deleted = portfolio_cache_result.rowcount or 0
+        portfolio_cache_deleted = affected_rows(portfolio_cache_result) or 0
 
         # 2. PR analysis cache
         pr_cache_result = await db.execute(
@@ -70,7 +71,7 @@ async def clear_candidate_caches(username: str, user_id: str, db: AsyncSession) 
                 PRAnalysisCache.github_username == username,
             )
         )
-        pr_cache_deleted = pr_cache_result.rowcount or 0
+        pr_cache_deleted = affected_rows(pr_cache_result) or 0
 
         # 3. PR analysis records (usage tracking) - user-specific
         pr_records_result = await db.execute(
@@ -79,7 +80,7 @@ async def clear_candidate_caches(username: str, user_id: str, db: AsyncSession) 
                 PRAnalysisRecord.github_username == username,
             )
         )
-        pr_records_deleted = pr_records_result.rowcount or 0
+        pr_records_deleted = affected_rows(pr_records_result) or 0
 
         await db.commit()
 

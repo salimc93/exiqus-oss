@@ -26,6 +26,7 @@ from ..models import (
     User,
     UserRole,
 )
+from ..rowcount import affected_rows
 
 
 class UserRepository:
@@ -267,7 +268,7 @@ class UserRepository:
             .values(usage_count=User.usage_count + increment_by)
         )
         await self.db.flush()
-        return result.rowcount > 0
+        return affected_rows(result) > 0
 
     async def update_usage_count(self, user_id: str, usage_value: int) -> bool:
         """
@@ -277,7 +278,7 @@ class UserRepository:
             update(User).where(User.user_id == user_id).values(usage_count=usage_value)
         )
         await self.db.flush()
-        return result.rowcount > 0
+        return affected_rows(result) > 0
 
     async def soft_delete_user(self, user_id: str) -> bool:
         """
@@ -302,7 +303,7 @@ class UserRepository:
         )
 
         # Also deactivate all API keys
-        if result.rowcount > 0:
+        if affected_rows(result) > 0:
             # We can instantiate APIKeyRepository here or use helper method
             # For now, let's just do it directly or rely on service layer coordination
             # BUT: In Repository pattern, repositories ideally shouldn't depend on each other too much.
@@ -313,7 +314,7 @@ class UserRepository:
                 update(APIKey).where(APIKey.user_id == user_id).values(is_active=False)
             )
 
-        return result.rowcount > 0
+        return affected_rows(result) > 0
 
     async def hard_delete_user(self, user_id: str) -> bool:
         """
@@ -344,7 +345,7 @@ class UserRepository:
         # 5. Finally delete the user
         result = await self.db.execute(delete(User).where(User.user_id == user_id))
 
-        return result.rowcount > 0
+        return affected_rows(result) > 0
 
     async def get_users_pending_deletion(self, days_ago: int = 30) -> List[User]:
         """Get users who requested deletion more than X days ago."""
@@ -434,7 +435,7 @@ class APIKeyRepository:
         result = await self.db.execute(
             update(APIKey).where(APIKey.user_id == user_id).values(is_active=False)
         )
-        return result.rowcount
+        return affected_rows(result)
 
     async def update_last_used(self, key_id: str) -> None:
         """Update API key's last used timestamp."""
@@ -541,14 +542,14 @@ class EmailVerificationRepository:
             .where(EmailVerificationToken.token == token)
             .values(used_at=datetime.now(timezone.utc))
         )
-        return result.rowcount > 0
+        return affected_rows(result) > 0
 
     async def verify_user_email(self, user_id: str) -> bool:
         """Mark user's email as verified."""
         result = await self.db.execute(
             update(User).where(User.user_id == user_id).values(is_verified=True)
         )
-        return result.rowcount > 0
+        return affected_rows(result) > 0
 
     async def cleanup_expired_tokens(self, days_old: int = 7) -> int:
         """Clean up expired tokens older than specified days."""
@@ -559,7 +560,7 @@ class EmailVerificationRepository:
             )
         )
         await self.db.commit()
-        return result.rowcount
+        return affected_rows(result)
 
     async def get_user_tokens(self, user_id: str) -> List[EmailVerificationToken]:
         """Get all verification tokens for a user."""

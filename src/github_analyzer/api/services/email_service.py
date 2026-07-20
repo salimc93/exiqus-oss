@@ -10,7 +10,7 @@ multiple backends (console for development, Resend for production).
 
 import os
 from abc import ABC, abstractmethod
-from typing import Optional
+from typing import Any, Dict, Optional
 
 from ...utils.config import get_config
 from ...utils.logging import get_logger
@@ -114,8 +114,9 @@ class ResendEmailBackend(EmailBackend):
 
             resend.api_key = self.api_key
 
-            # Prepare email data
-            email_data = {
+            # Heterogeneous payload: string fields alongside the recipient
+            # list, plus an optional "text" key added below.
+            email_data: Dict[str, Any] = {
                 "from": from_email
                 or os.getenv("EMAIL_FROM", "Exiqus <noreply@example.com>"),
                 "to": [to_email],

@@ -69,7 +69,7 @@ def mock_config_without_secret():
 @pytest.fixture
 async def admin_test_client(mock_config_with_secret):
     """Create test client with admin config override."""
-    from httpx import AsyncClient
+    from httpx import ASGITransport, AsyncClient
 
     from src.github_analyzer.api.main import app
     from src.github_analyzer.api.routes.admin_auth import get_admin_config
@@ -77,7 +77,9 @@ async def admin_test_client(mock_config_with_secret):
     # Set the override before creating the client
     app.dependency_overrides[get_admin_config] = lambda: mock_config_with_secret
 
-    async with AsyncClient(app=app, base_url="http://test") as client:
+    async with AsyncClient(
+        transport=ASGITransport(app=app), base_url="http://test"
+    ) as client:
         yield client
 
     # Clean up

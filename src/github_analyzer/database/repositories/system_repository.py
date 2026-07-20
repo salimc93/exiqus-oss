@@ -14,6 +14,7 @@ from sqlalchemy import and_, delete, func, select, update
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from ..models import ContactMessage, ContactStatus, SystemMetric, WebhookEvent
+from ..rowcount import affected_rows
 
 
 class SystemRepository:
@@ -166,7 +167,7 @@ class WebhookRepository:
         )
 
         await self.db.commit()
-        return result.rowcount > 0
+        return affected_rows(result) > 0
 
     async def get_unprocessed_events(
         self, limit: int = 50, max_attempts: int = 3
@@ -199,7 +200,7 @@ class WebhookRepository:
         )
 
         await self.db.commit()
-        return result.rowcount > 0
+        return affected_rows(result) > 0
 
     async def cleanup_old_events(self, days_old: int = 30) -> int:
         """Clean up old processed webhook events."""
@@ -215,7 +216,7 @@ class WebhookRepository:
         )
 
         await self.db.commit()
-        return result.rowcount
+        return affected_rows(result)
 
     async def get_failed_webhooks(self, max_attempts: int = 5) -> List[WebhookEvent]:
         """Get failed webhook events for retry."""
@@ -255,7 +256,7 @@ class WebhookRepository:
         )
 
         await self.db.commit()
-        return result.rowcount > 0
+        return affected_rows(result) > 0
 
     async def delete_old_webhooks(self, days: int = 30) -> int:
         """Delete old processed webhook events."""
@@ -271,7 +272,7 @@ class WebhookRepository:
         )
 
         await self.db.commit()
-        return result.rowcount
+        return affected_rows(result)
 
     async def get_webhook_statistics(self) -> Dict[str, Any]:
         """Get webhook processing statistics."""
