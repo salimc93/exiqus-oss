@@ -34,6 +34,16 @@ updates:
     labels:
       - dependencies
       - frontend
+    ignore:
+      # TypeScript 7 is the native Go port (Corsa). It does not yet expose the
+      # programmatic API that Next.js calls to run its type-check step, so
+      # `next build` reports TypeScript as "not installed" even though it is.
+      # The TypeScript team lists the API as "not ready" in the port's own
+      # status matrix. Revisit once that lands and Next.js supports it; until
+      # then a weekly PR for it is pure noise.
+      - dependency-name: typescript
+        update-types:
+          - version-update:semver-major
     groups:
       # Batch routine dev-tooling bumps into one PR rather than many
       dev-dependencies:
