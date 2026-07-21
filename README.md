@@ -6,9 +6,10 @@
 [![Next.js](https://img.shields.io/badge/Next.js-16-black)]()
 
 > **Status:** the hosted Exiqus service has shut down, so there is nothing to
-> sign up for. The code here is complete and current, and runs on your own
-> infrastructure with your own API keys. Issues and pull requests are welcome,
-> but this is a personal project now, so replies may be slow.
+> sign up for. The code was written in 2025 and is feature-complete; its
+> dependencies are up to date and the full test suite passes, so it runs today
+> on your own infrastructure with your own API keys. Issues and pull requests
+> are welcome, but this is a personal project now, so replies may be slow.
 
 **Evidence-based developer evaluation from GitHub: no scores, no ratings, no verdicts.**
 
