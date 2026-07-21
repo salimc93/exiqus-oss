@@ -2,8 +2,13 @@
 
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
 [![Tests](https://img.shields.io/badge/tests-2000%2B-green)]()
-[![Python](https://img.shields.io/badge/python-3.11+-blue)]()
-[![Next.js](https://img.shields.io/badge/Next.js-15-black)]()
+[![Python](https://img.shields.io/badge/python-3.10+-blue)]()
+[![Next.js](https://img.shields.io/badge/Next.js-16-black)]()
+
+> **Status:** the hosted Exiqus service has shut down, so there is nothing to
+> sign up for. The code here is complete and current, and runs on your own
+> infrastructure with your own API keys. Issues and pull requests are welcome,
+> but this is a personal project now, so replies may be slow.
 
 **Evidence-based developer evaluation from GitHub: no scores, no ratings, no verdicts.**
 
@@ -19,7 +24,7 @@ number.
 
 ![Exiqus walking through a portfolio analysis](frontend/public/demo-preview.webp)
 
-**[▶ Download the full walkthrough (2m 38s, 13MB)](https://github.com/salimc93/exiqus-oss/releases/download/v1.0.0/demo-video.mp4)**
+**[▶ Download the full walkthrough (2m 38s, 13MB)](https://github.com/salimc93/exiqus-oss/releases/download/v1.1.0/demo-video.mp4)**
 
 Above: the evidence and interview tabs of a portfolio analysis. The full
 recording covers the whole workflow, from kicking off an analysis through
@@ -47,7 +52,7 @@ for anyone who wants to use it, learn from it, or build on it.
 Every design decision follows one rule: **observations over
 assessments**.
 
-- ✅ "2,022 tests in the repository, run in CI on every push"
+- ✅ "2,023 tests in the repository, run in CI on every push"
 - ✅ "Commit messages consistently explain *why*, not just *what*"
 - ❌ ~~"Code quality: 87/100"~~
 - ❌ ~~"Verdict: HIRE"~~
@@ -94,8 +99,8 @@ Plus:
 
 ```
 ┌─────────────┐     ┌──────────────────┐     ┌────────────┐
-│  Next.js 15 │────▶│  FastAPI backend │────▶│ PostgreSQL │
-│  frontend   │     │  (Python 3.11)   │     └────────────┘
+│  Next.js 16 │────▶│  FastAPI backend │────▶│ PostgreSQL │
+│  frontend   │     │  (Python 3.10+)  │     └────────────┘
 └─────────────┘     │                  │     ┌────────────┐
                     │  evidence engine │────▶│   Redis    │
                     │  + Claude API    │     └────────────┘
@@ -121,7 +126,7 @@ a CI pipeline that runs all of it.
 
 ### Prerequisites
 
-- Python 3.11+, [Poetry](https://python-poetry.org/)
+- Python 3.10+, [Poetry](https://python-poetry.org/)
 - Node.js 20+
 - Docker (for the local PostgreSQL database and the test suite)
 - An [Anthropic API key](https://console.anthropic.com/) and a GitHub token

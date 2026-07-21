@@ -9,7 +9,7 @@ under the same AGPL-3.0 license that covers the project.
 
 ## Development Setup
 
-### Backend (Python 3.11+, Poetry, Docker)
+### Backend (Python 3.10+, Poetry, Docker)
 
 ```bash
 poetry install --with dev
