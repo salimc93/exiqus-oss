@@ -96,6 +96,16 @@ Plus:
   admin portal, rate limiting; useful as a reference even if you only
   self-host the analyzer
 
+All three modes are exposed through the web application. There is also a
+command-line interface (`exiqus`), but it is an early artifact from the
+project's first iteration and only partially wired up: the admin commands
+work, single-repository analysis is roughly there against the current
+engine (it lacks the "not worth analyzing" guards for empty/hello-world
+repos and does not enable the richer evidence layer), and the portfolio
+and pull-request modes are not implemented in the CLI at all. Treat the
+web app as the complete surface. Finishing the CLI is a possible future
+job, not a supported feature today.
+
 ## Architecture
 
 ```
