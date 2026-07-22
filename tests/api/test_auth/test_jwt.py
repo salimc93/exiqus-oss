@@ -77,6 +77,30 @@ class TestPasswordHashing:
 
         assert verify_password(password, password_hash) is True
 
+    def test_long_password_hashes_and_verifies(self):
+        """A password longer than bcrypt's 72-byte limit must not error.
+
+        bcrypt >= 5 raises ValueError past 72 bytes where earlier versions
+        truncated silently. hash_password and verify_password truncate to 72
+        bytes so long passphrases still work.
+        """
+        long_password = "a" * 200
+
+        password_hash = hash_password(long_password)
+        assert verify_password(long_password, password_hash) is True
+
+    def test_passwords_matching_in_first_72_bytes_are_equivalent(self):
+        """bcrypt only sees the first 72 bytes; verification reflects that.
+
+        This is bcrypt's inherent behaviour, unchanged by the truncation - it
+        also held under the previous silent-truncation versions. Pinned here so
+        the truncation is deliberate rather than accidental.
+        """
+        base = "a" * 72
+        password_hash = hash_password(base + "ORIGINAL")
+
+        assert verify_password(base + "DIFFERENT", password_hash) is True
+
 
 class TestRS256Algorithm:
     """Test RS256 asymmetric signing."""

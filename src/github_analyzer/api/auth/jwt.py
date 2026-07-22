@@ -408,8 +408,12 @@ def hash_password(password: str) -> str:
     Returns:
         str: Hashed password
     """
-    # Convert password to bytes and hash with salt
-    password_bytes = password.encode("utf-8")
+    # bcrypt only considers the first 72 bytes of a password. bcrypt < 5
+    # truncated silently; bcrypt >= 5 raises ValueError instead. Truncate
+    # explicitly so long passphrases still hash, and so the byte range fed to
+    # bcrypt is identical to what earlier versions used - existing stored
+    # hashes were computed on these same first 72 bytes.
+    password_bytes = password.encode("utf-8")[:72]
     salt = bcrypt.gensalt()
     hashed = bcrypt.hashpw(password_bytes, salt)
     return hashed.decode("utf-8")
@@ -426,8 +430,10 @@ def verify_password(plain_password: str, hashed_password: str) -> bool:
     Returns:
         bool: True if password matches
     """
-    # Convert to bytes and verify
-    password_bytes = plain_password.encode("utf-8")
+    # Truncate to 72 bytes to match hash_password (see note there). This keeps
+    # verification working for passwords stored before the bcrypt 5 upgrade and
+    # avoids a ValueError on long inputs.
+    password_bytes = plain_password.encode("utf-8")[:72]
     hashed_bytes = hashed_password.encode("utf-8")
     return bcrypt.checkpw(password_bytes, hashed_bytes)
 
